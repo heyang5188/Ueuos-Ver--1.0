@@ -36,6 +36,9 @@
     <ClInclude Include="TriangeCommand.h">
       <Filter>头文件\DrawCommands</Filter>
     </ClInclude>
+    <ClInclude Include="QuadDrawCommand.h">
+      <Filter>头文件\DrawCommands</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -45,6 +48,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="TriangeCommand.cpp">
+      <Filter>源文件\DrawCommads</Filter>
+    </ClCompile>
+    <ClCompile Include="QuadDrawCommand.cpp">
       <Filter>源文件\DrawCommads</Filter>
     </ClCompile>
   </ItemGroup>
