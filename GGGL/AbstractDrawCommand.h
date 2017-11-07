@@ -1,0 +1,73 @@
+#pragma once
+// GLEW
+#define GLEW_STATIC
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
+#include <vector>
+using namespace std;
+
+struct Vector2
+{
+	Vector2(float xx,float yy):_x(xx),_y(yy){}
+	float _x;
+	float _y;
+};
+
+struct Vector3 : public Vector2
+{
+	Vector3(float xx,float yy,float zz):Vector2(xx,yy),_z(zz){}
+	float _z;
+};
+
+struct Color3F
+{
+	Color3F(float rr,float gg,float bb):_r(rr),_g(gg),_b(bb) {
+	}
+	float _r;
+	float _g;
+	float _b;
+};
+
+struct Color4F : public Color3F
+{
+	Color4F(float rr, float gg, float bb,float aa):Color3F(rr,gg,bb),_alpha(aa){}
+	float   _alpha;
+};
+
+
+struct VertexInfo
+{
+	VertexInfo(float x, float y, float z,float r,float g,float b,float a=1.0):position(x,y,z),color(r,g,b,a){
+	}
+
+	Vector3 position;
+	Color4F color;
+};
+
+
+class AbstractDrawCommand
+{
+public:
+	AbstractDrawCommand() : _vao(0){
+
+	}
+	virtual ~AbstractDrawCommand() {
+		_vao = 0;
+		_verties.clear();
+	}
+	void setVertexData(vector<VertexInfo> verties) {
+		vector<VertexInfo>().swap(_verties);
+		_verties = vector<VertexInfo>(verties.begin(), verties.end());
+		applyVertexData();
+	}
+	GLuint getVAO() { return _vao; }
+
+	virtual void doDraw() = 0;
+protected:
+	virtual void applyVertexData() = 0;
+
+protected:
+	GLuint _vao;
+protected:
+	vector<VertexInfo> _verties;
+};
