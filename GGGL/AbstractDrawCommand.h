@@ -6,16 +6,25 @@
 #include <vector>
 using namespace std;
 
+
 struct Vector2
 {
-	Vector2(float xx,float yy):_x(xx),_y(yy){}
+	explicit Vector2(float xx,float yy):_x(xx),_y(yy){}
 	float _x;
 	float _y;
 };
 
+struct Size
+{
+	explicit Size(float ww, float hh) :_w(ww), _h(hh) {}
+	float _w;
+	float _h;
+};
+
 struct Vector3 : public Vector2
 {
-	Vector3(float xx,float yy,float zz):Vector2(xx,yy),_z(zz){}
+
+	explicit Vector3(float xx,float yy,float zz=0.0):Vector2(xx,yy),_z(zz){}
 	float _z;
 };
 
@@ -40,6 +49,8 @@ struct VertexInfo
 	VertexInfo(float x, float y, float z,float r,float g,float b,float a=1.0):position(x,y,z),color(r,g,b,a){
 	}
 
+	VertexInfo(Vector3 pos, Color4F clr = Color4F(1.0,1.0,1.0,1.0)) :position(pos),color(clr){}
+
 	Vector3 position;
 	Color4F color;
 };
@@ -62,9 +73,9 @@ public:
 	}
 	GLuint getVAO() { return _vao; }
 
-	virtual void doDraw() = 0;
+	virtual void doDraw() {};
 protected:
-	virtual void applyVertexData() = 0;
+	virtual void applyVertexData() {};
 
 protected:
 	GLuint _vao;

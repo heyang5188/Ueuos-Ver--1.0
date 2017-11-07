@@ -11,10 +11,13 @@
 
 //#include "AbstractDrawCommand.h"
 #include "TriangeCommand.h"
-using namespace std;
-vector<AbstractDrawCommand> renderVector;
+#include "QuadCommand.h"
 
-const GLchar* vertexShaderSource = "#version 330 core\n"
+using namespace std;
+vector<AbstractDrawCommand*> renderVector;
+
+const GLchar* vertexShaderSource = 
+"#version 330 core\n"
 "layout (location = 0) in vec3 position;\n"
 "layout (location = 1) in vec4 color;\n"
 "out vec4 vertexColor;\n"
@@ -23,7 +26,8 @@ const GLchar* vertexShaderSource = "#version 330 core\n"
 "gl_Position = vec4(position.x, position.y, position.z, 1.0);\n"
 "vertexColor=color;"
 "}\0";
-const GLchar* fragmentShaderSource = "#version 330 core\n"
+const GLchar* fragmentShaderSource = 
+"#version 330 core\n"
 "out vec4 color;\n"
 "in  vec4 vertexColor;\n"
 "void main()\n"
@@ -134,18 +138,23 @@ int main()
 	TriangeCommand tc = TriangeCommand();
 	VertexInfo v1 = VertexInfo(-0.5f, -0.5f, 0.0f,1.0,0.0,0.0);
 	VertexInfo v2 = VertexInfo(0.5f, -0.5f, 0.0f, 0.0, 1.0, 0.0);
-	VertexInfo v3 = VertexInfo(0.0f, 0.5f, 0.0f, 0.0, 0.0, 1.0);
+	VertexInfo v3 = VertexInfo(0.0f, 0.5f, -1.0f, 0.0, 0.0, 1.0);
 	vector<VertexInfo> data{v1,v2,v3};
 	tc.setVertexData(data);
-	//renderVector.push_back(tc);
-
+	QuadCommand quad = QuadCommand(Vector3(-0.5, 0.5), Vector3(-0.5, -0.5), Vector3(0.5, 0.5), Vector3(0.5, -0.5));
+	renderVector.push_back(&quad);
+	renderVector.push_back(&tc);
 	while (!glfwWindowShouldClose(window))
 	{
 		glfwPollEvents();
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 		glUseProgram(glPro);		
-		tc.doDraw();
+		
+		for (vector<AbstractDrawCommand*>::iterator it = renderVector.begin(); it != renderVector.end(); ++it) {
+			(*it)->doDraw();
+		}
+
 		glfwSwapBuffers(window);
 	}
 	glfwTerminate();
