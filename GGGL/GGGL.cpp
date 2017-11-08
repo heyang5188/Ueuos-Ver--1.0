@@ -6,12 +6,19 @@
 
 // GLFW
 #include <GLFW/glfw3.h>
-
 #include <queue>
 
+
 //#include "AbstractDrawCommand.h"
-#include "TriangeCommand.h"
-#include "QuadCommand.h"
+#include "DrawCommand/TriangeCommand.h"
+#include "DrawCommand/QuadCommand.h"
+#include "Math/Vector2.h"
+
+
+//TEST 
+void Vector2UnitTest();
+//
+
 
 using namespace std;
 vector<AbstractDrawCommand*> renderVector;
@@ -42,14 +49,6 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, GL_TRUE);
 }
-
-
-GLfloat vertices[] = {
-	-0.5f, -0.5f, 0.0f,
-	0.5f, -0.5f, 0.0f,
-	0.0f,  0.5f, 0.0f
-};
-
 
 GLuint genShader(const char* source, GLenum shaderType) {
 	//create shader obj
@@ -101,6 +100,7 @@ GLuint genGLProgram() {
 
 int main()
 {
+	Vector2UnitTest();
 
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -161,3 +161,47 @@ int main()
 	return 0;
 }
 
+
+void printVector2(Math::Vector2 vec) {
+	cout <<"(" << vec._x << "," << vec._y << ")" << endl;
+}
+
+
+
+void Vector2UnitTest() {
+	Math::Vector2 v1(1, 1);
+	cout << "Vector2 v1(1,1)\n";
+//	cout << "V1 Mag:";
+	//cout << v1.magnitude() << endl;
+	//cout << "Normalizing:";
+	//cout << v1.normalize().magnitude() << endl;
+	Math::Vector2 v2(1, -1);
+	cout << "Vector2 v1(1,-1)\n";
+	cout << "v1+v2 : ";
+	printVector2(v1 + v2);
+	cout << "v1-v2 : ";
+	printVector2(v1 - v2);
+
+	cout << "Mul Vector by real number: v1*3";
+	printVector2(v1 * 3);
+	cout << "Mul Vector by real number : 3*v1";
+	printVector2(3 * v1);
+
+	cout << "Lerp from v1 to v2 at 0.3:";
+	printVector2(Math::Vector2::lerp(v1, v2, 0.3));
+	cout << "Lerp from v1 to v2 at 0.5:";
+	printVector2(Math::Vector2::lerp(v1, v2, 0.5));
+	cout << "Lerp from v1 to v2 at 0.7:";
+	printVector2(Math::Vector2::lerp(v1, v2, 0.7));
+
+	cout << "Dot product of v1 and v2: ";
+	cout<<(Math::Vector2::dot(v1, v2))<<endl;
+
+	cout << "Angle:";
+	cout << Math::Vector2::angle(v1, v2) << endl;  ;
+	
+	Math::Vector2 normal(0, 1);
+	Math::Vector2 incoming(-1, -1);
+	cout << "reflect : ";
+	printVector2(Math::Vector2::reflect(incoming, normal));
+}

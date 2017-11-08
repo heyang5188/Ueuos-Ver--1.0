@@ -76,8 +76,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>F:\Ueuos\Ueuos-Ver--1.0\includes;$(IncludePath)</IncludePath>
-    <LibraryPath>F:\Ueuos\Ueuos-Ver--1.0\libs;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)\..\includes;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)\..\libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -151,17 +151,19 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AbstractDrawCommand.h" />
-    <ClInclude Include="QuadCommand.h" />
+    <ClInclude Include="DrawCommand\AbstractDrawCommand.h" />
+    <ClInclude Include="DrawCommand\QuadCommand.h" />
+    <ClInclude Include="DrawCommand\TriangeCommand.h" />
+    <ClInclude Include="Math\Vector2.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="TriangeCommand.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="DrawCommand\QuadCommand.cpp" />
+    <ClCompile Include="DrawCommand\TriangeCommand.cpp" />
     <ClCompile Include="GGGL.cpp" />
-    <ClCompile Include="QuadCommand.cpp" />
+    <ClCompile Include="Math\Vector2.cpp" />
     <ClCompile Include="stdafx.cpp" />
-    <ClCompile Include="TriangeCommand.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

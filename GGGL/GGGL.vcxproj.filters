@@ -19,6 +19,12 @@
     <Filter Include="头文件\DrawCommands">
       <UniqueIdentifier>{baa85d8d-2ab8-40f8-97a9-d91e4891ec78}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\Math">
+      <UniqueIdentifier>{91450fc2-6aad-4bdd-bc8c-3dd15877ca6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Math">
+      <UniqueIdentifier>{327a87be-0fd9-47ef-87a0-a3b60a3da0e5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -30,13 +36,16 @@
     <ClInclude Include="targetver.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="AbstractDrawCommand.h">
+    <ClInclude Include="Math\Vector2.h">
+      <Filter>头文件\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawCommand\AbstractDrawCommand.h">
       <Filter>头文件\DrawCommands</Filter>
     </ClInclude>
-    <ClInclude Include="TriangeCommand.h">
+    <ClInclude Include="DrawCommand\QuadCommand.h">
       <Filter>头文件\DrawCommands</Filter>
     </ClInclude>
-    <ClInclude Include="QuadCommand.h">
+    <ClInclude Include="DrawCommand\TriangeCommand.h">
       <Filter>头文件\DrawCommands</Filter>
     </ClInclude>
   </ItemGroup>
@@ -47,10 +56,13 @@
     <ClCompile Include="GGGL.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="TriangeCommand.cpp">
+    <ClCompile Include="Math\Vector2.cpp">
+      <Filter>源文件\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawCommand\QuadCommand.cpp">
       <Filter>源文件\DrawCommads</Filter>
     </ClCompile>
-    <ClCompile Include="QuadCommand.cpp">
+    <ClCompile Include="DrawCommand\TriangeCommand.cpp">
       <Filter>源文件\DrawCommads</Filter>
     </ClCompile>
   </ItemGroup>
