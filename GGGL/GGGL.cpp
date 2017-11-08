@@ -14,6 +14,12 @@
 #include "DrawCommand/QuadCommand.h"
 #include "Math/Vector2.h"
 
+
+//TEST 
+void Vector2UnitTest();
+//
+
+
 using namespace std;
 vector<AbstractDrawCommand*> renderVector;
 
@@ -91,75 +97,78 @@ GLuint genGLProgram() {
 	return program;
 }
 
-//
-//int main()
-//{
-//
-//	glfwInit();
-//	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-//	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-//	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-//	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
-//
-//	GLFWwindow* window = glfwCreateWindow(800, 600, "Uouos3D Ver.-1.0", nullptr, nullptr);
-//	if (window == nullptr)
-//	{
-//		std::cout << "Failed to create GLFW window" << std::endl;
-//		glfwTerminate();
-//		return -1;
-//	}
-//	glfwMakeContextCurrent(window);
-//	glfwSetKeyCallback(window, key_callback);  
-//	glewExperimental = GL_TRUE;
-//	if (glewInit() != GLEW_OK)
-//	{
-//		std::cout << "Failed to initialize GLEW" << std::endl;
-//		return -1;
-//	}
-//
-//
-//	int width, height;
-//	glfwGetFramebufferSize(window, &width, &height);
-//	glViewport(0, 0, width, height);
-//
-//
-//	
-//
-//
-//	GLuint glPro = genGLProgram();
-//
-//	TriangeCommand tc = TriangeCommand();
-//	VertexInfo v1 = VertexInfo(-0.5f, -0.5f, 0.0f,1.0,0.0,0.0);
-//	VertexInfo v2 = VertexInfo(0.5f, -0.5f, 0.0f, 0.0, 1.0, 0.0);
-//	VertexInfo v3 = VertexInfo(0.0f, 0.5f, -1.0f, 0.0, 0.0, 1.0);
-//	vector<VertexInfo> data{v1,v2,v3};
-//	tc.setVertexData(data);
-//	QuadCommand quad = QuadCommand(Vector3(-0.5, 0.5), Vector3(-0.5, -0.5), Vector3(0.5, 0.5), Vector3(0.5, -0.5));
-//	renderVector.push_back(&quad);
-//	renderVector.push_back(&tc);
-//	while (!glfwWindowShouldClose(window))
-//	{
-//		glfwPollEvents();
-//		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-//		glClear(GL_COLOR_BUFFER_BIT);
-//		glUseProgram(glPro);		
-//		
-//		for (vector<AbstractDrawCommand*>::iterator it = renderVector.begin(); it != renderVector.end(); ++it) {
-//			(*it)->doDraw();
-//		}
-//
-//		glfwSwapBuffers(window);
-//	}
-//	glfwTerminate();
-//	return 0;
-//}
-//
+
+int main()
+{
+	Vector2UnitTest();
+
+	glfwInit();
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
+
+	GLFWwindow* window = glfwCreateWindow(800, 600, "Uouos3D Ver.-1.0", nullptr, nullptr);
+	if (window == nullptr)
+	{
+		std::cout << "Failed to create GLFW window" << std::endl;
+		glfwTerminate();
+		return -1;
+	}
+	glfwMakeContextCurrent(window);
+	glfwSetKeyCallback(window, key_callback);  
+	glewExperimental = GL_TRUE;
+	if (glewInit() != GLEW_OK)
+	{
+		std::cout << "Failed to initialize GLEW" << std::endl;
+		return -1;
+	}
+
+
+	int width, height;
+	glfwGetFramebufferSize(window, &width, &height);
+	glViewport(0, 0, width, height);
+
+
+	
+
+
+	GLuint glPro = genGLProgram();
+
+	TriangeCommand tc = TriangeCommand();
+	VertexInfo v1 = VertexInfo(-0.5f, -0.5f, 0.0f,1.0,0.0,0.0);
+	VertexInfo v2 = VertexInfo(0.5f, -0.5f, 0.0f, 0.0, 1.0, 0.0);
+	VertexInfo v3 = VertexInfo(0.0f, 0.5f, -1.0f, 0.0, 0.0, 1.0);
+	vector<VertexInfo> data{v1,v2,v3};
+	tc.setVertexData(data);
+	QuadCommand quad = QuadCommand(Vector3(-0.5, 0.5), Vector3(-0.5, -0.5), Vector3(0.5, 0.5), Vector3(0.5, -0.5));
+	renderVector.push_back(&quad);
+	renderVector.push_back(&tc);
+	while (!glfwWindowShouldClose(window))
+	{
+		glfwPollEvents();
+		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
+		glUseProgram(glPro);		
+		
+		for (vector<AbstractDrawCommand*>::iterator it = renderVector.begin(); it != renderVector.end(); ++it) {
+			(*it)->doDraw();
+		}
+
+		glfwSwapBuffers(window);
+	}
+	glfwTerminate();
+	return 0;
+}
+
 
 void printVector2(Math::Vector2 vec) {
 	cout <<"(" << vec._x << "," << vec._y << ")" << endl;
 }
 
-int main() {
+
+
+void Vector2UnitTest() {
 	Math::Vector2 v1(1, 1);
 	cout << "Vector2 v1(1,1)\n";
 //	cout << "V1 Mag:";
@@ -189,7 +198,10 @@ int main() {
 	cout<<(Math::Vector2::dot(v1, v2))<<endl;
 
 	cout << "Angle:";
-	cout << Math::Vector2::angle(v1, v2) << endl;;
-
-	return 0;
+	cout << Math::Vector2::angle(v1, v2) << endl;  ;
+	
+	Math::Vector2 normal(0, 1);
+	Math::Vector2 incoming(-1, -1);
+	cout << "reflect : ";
+	printVector2(Math::Vector2::reflect(incoming, normal));
 }
