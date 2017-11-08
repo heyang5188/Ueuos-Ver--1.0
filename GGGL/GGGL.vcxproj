@@ -76,8 +76,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>F:\Ueuos\Ueuos-Ver--1.0\includes;$(IncludePath)</IncludePath>
-    <LibraryPath>F:\Ueuos\Ueuos-Ver--1.0\libs;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)\..\includes;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)\..\libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
