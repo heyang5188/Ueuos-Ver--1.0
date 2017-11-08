@@ -163,7 +163,7 @@ int main()
 
 
 void printVector2(Math::Vector2 vec) {
-	cout <<"(" << vec._x << "," << vec._y << ")" << endl;
+	cout <<"(" << vec.x << "," << vec.y << ")" << endl;
 }
 
 
