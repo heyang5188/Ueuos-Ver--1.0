@@ -151,17 +151,19 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AbstractDrawCommand.h" />
-    <ClInclude Include="QuadCommand.h" />
+    <ClInclude Include="DrawCommand\AbstractDrawCommand.h" />
+    <ClInclude Include="DrawCommand\QuadCommand.h" />
+    <ClInclude Include="DrawCommand\TriangeCommand.h" />
+    <ClInclude Include="Math\Vector2.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="TriangeCommand.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="DrawCommand\QuadCommand.cpp" />
+    <ClCompile Include="DrawCommand\TriangeCommand.cpp" />
     <ClCompile Include="GGGL.cpp" />
-    <ClCompile Include="QuadCommand.cpp" />
+    <ClCompile Include="Math\Vector2.cpp" />
     <ClCompile Include="stdafx.cpp" />
-    <ClCompile Include="TriangeCommand.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
