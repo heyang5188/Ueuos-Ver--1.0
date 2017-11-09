@@ -63,9 +63,6 @@
     <ClInclude Include="Math\Transform.h">
       <Filter>头文件\Math</Filter>
     </ClInclude>
-    <ClInclude Include="Math\Euler.h">
-      <Filter>头文件\Math</Filter>
-    </ClInclude>
     <ClInclude Include="Math\Quaternion.h">
       <Filter>头文件\Math</Filter>
     </ClInclude>
@@ -93,9 +90,6 @@
       <Filter>源文件\Math</Filter>
     </ClCompile>
     <ClCompile Include="Math\Transform.cpp">
-      <Filter>源文件\Math</Filter>
-    </ClCompile>
-    <ClCompile Include="Math\Euler.cpp">
       <Filter>源文件\Math</Filter>
     </ClCompile>
     <ClCompile Include="Math\Quaternion.cpp">

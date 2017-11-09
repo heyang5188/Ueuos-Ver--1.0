@@ -4,16 +4,12 @@
 
 namespace Math {
 	
-	Vector2 Vector2::up(0.0, 1.0);
-	Vector2 Vector2::zero(0.0, 0.0);
-	Vector2 Vector2::left(-1.0, 0);
+	const Vector2 Vector2::up(0.0, 1.0);
+	const Vector2 Vector2::zero(0.0, 0.0);
+	const Vector2 Vector2::left(-1.0, 0);
 
 
 	Vector2::Vector2(float xx,float yy):x(xx), y(yy) {
-	
-	}
-
-	Vector2::Vector2(const Vector2& rhs) : x(rhs.x), y(rhs.y) {
 	
 	}
 

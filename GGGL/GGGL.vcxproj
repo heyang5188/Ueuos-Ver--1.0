@@ -154,7 +154,6 @@
     <ClInclude Include="DrawCommand\AbstractDrawCommand.h" />
     <ClInclude Include="DrawCommand\QuadCommand.h" />
     <ClInclude Include="DrawCommand\TriangeCommand.h" />
-    <ClInclude Include="Math\Euler.h" />
     <ClInclude Include="Math\Matrix.h" />
     <ClInclude Include="Math\Quaternion.h" />
     <ClInclude Include="Math\Transform.h" />
@@ -167,7 +166,6 @@
     <ClCompile Include="DrawCommand\QuadCommand.cpp" />
     <ClCompile Include="DrawCommand\TriangeCommand.cpp" />
     <ClCompile Include="GGGL.cpp" />
-    <ClCompile Include="Math\Euler.cpp" />
     <ClCompile Include="Math\Matrix.cpp" />
     <ClCompile Include="Math\Quaternion.cpp" />
     <ClCompile Include="Math\Transform.cpp" />

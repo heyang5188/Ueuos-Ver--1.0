@@ -42,9 +42,9 @@ namespace Math {
 		float x;
 		float y;
 	public:
-		static Vector2 zero;
-		static Vector2 up;
-		static Vector2 left;
+		static const Vector2 zero;
+		static const Vector2 up;
+		static const Vector2 left;
 	};
 
 };
