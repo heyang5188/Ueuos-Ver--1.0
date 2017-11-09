@@ -9,9 +9,9 @@ using namespace std;
 
 struct Vector2
 {
-	explicit Vector2(float xx,float yy):_x(xx),_y(yy){}
-	float _x;
-	float _y;
+	explicit Vector2(float xx,float yy):x(xx),y(yy){}
+	float x;
+	float y;
 };
 
 struct Size

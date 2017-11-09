@@ -25,6 +25,12 @@
     <Filter Include="头文件\Math">
       <UniqueIdentifier>{327a87be-0fd9-47ef-87a0-a3b60a3da0e5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\UeuosObject">
+      <UniqueIdentifier>{ecac3d0a-bb0d-4d35-8126-23df7dea817c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\UeuosObject">
+      <UniqueIdentifier>{29c36356-011d-4c5f-8303-77786e8b6826}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -48,6 +54,21 @@
     <ClInclude Include="DrawCommand\TriangeCommand.h">
       <Filter>头文件\DrawCommands</Filter>
     </ClInclude>
+    <ClInclude Include="Math\Vector3.h">
+      <Filter>头文件\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Matrix.h">
+      <Filter>头文件\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Transform.h">
+      <Filter>头文件\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Euler.h">
+      <Filter>头文件\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Quaternion.h">
+      <Filter>头文件\Math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -64,6 +85,21 @@
     </ClCompile>
     <ClCompile Include="DrawCommand\TriangeCommand.cpp">
       <Filter>源文件\DrawCommads</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\Vector3.cpp">
+      <Filter>源文件\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\Matrix.cpp">
+      <Filter>源文件\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\Transform.cpp">
+      <Filter>源文件\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\Euler.cpp">
+      <Filter>源文件\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\Quaternion.cpp">
+      <Filter>源文件\Math</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

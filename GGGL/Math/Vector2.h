@@ -39,8 +39,12 @@ namespace Math {
 		// V3 TO V2 
 		// V2 TO V3
 	public:
-		float _x;
-		float _y;
+		float x;
+		float y;
+	public:
+		static Vector2 zero;
+		static Vector2 up;
+		static Vector2 left;
 	};
 
 };

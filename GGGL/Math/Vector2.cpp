@@ -4,11 +4,16 @@
 
 namespace Math {
 	
-	Vector2::Vector2(float xx,float yy):_x(xx), _y(yy) {
+	Vector2 Vector2::up(0.0, 1.0);
+	Vector2 Vector2::zero(0.0, 0.0);
+	Vector2 Vector2::left(-1.0, 0);
+
+
+	Vector2::Vector2(float xx,float yy):x(xx), y(yy) {
 	
 	}
 
-	Vector2::Vector2(const Vector2& rhs) : _x(rhs._x), _y(rhs._y) {
+	Vector2::Vector2(const Vector2& rhs) : x(rhs.x), y(rhs.y) {
 	
 	}
 
@@ -19,13 +24,13 @@ namespace Math {
 	Vector2 Vector2::normalize(){
 		Vector2 temp(*this);
 		float mag = temp.magnitude();
-		temp._x /= mag;
-		temp._y /= mag;
+		temp.x /= mag;
+		temp.y /= mag;
 		return temp;
 	}
 
 	float Vector2::sqrMagnitude() {
-		return _x*_x + _y*_y;
+		return x*x + y*y;
 	}
 
 	float Vector2::angle(Vector2& from, Vector2& to) {
@@ -37,7 +42,7 @@ namespace Math {
 		[ a b ]*[ c d ] = ac+bd
 	*/
 	float Vector2::dot(Vector2& a, Vector2& b) {
-		return a._x*b._x + a._y*b._y;
+		return a.x*b.x + a.y*b.y;
 	}
 
 	float Vector2::distance(Vector2& a, Vector2& b) {
@@ -68,8 +73,8 @@ namespace Math {
 
 	Vector2 Vector2::operator*( float t) {
 		Vector2 temp(*this);
-		temp._x*=t;
-		temp._y*=t;
+		temp.x*=t;
+		temp.y*=t;
 		return temp;
 	}
 
@@ -79,15 +84,15 @@ namespace Math {
 
 	Vector2 Vector2::operator+(Vector2& other) {
 		Vector2 temp(*this);
-		temp._x += other._x;
-		temp._y += other._y;
+		temp.x += other.x;
+		temp.y += other.y;
 		return temp;
 	}
 
 	Vector2 Vector2::operator-(Vector2& vec) {
 		Vector2 temp(*this);
-		temp._x -= vec._x;
-		temp._y -= vec._y;
+		temp.x -= vec.x;
+		temp.y -= vec.y;
 		return temp;
 	}
 
