@@ -13,10 +13,12 @@
 #include "DrawCommand/TriangeCommand.h"
 #include "DrawCommand/QuadCommand.h"
 #include "Math/Vector2.h"
+#include "Math/Vector3.h"
 
 
 //TEST 
 void Vector2UnitTest();
+void Vector3UnitTest();
 //
 
 
@@ -100,7 +102,7 @@ GLuint genGLProgram() {
 
 int main()
 {
-	Vector2UnitTest();
+	Vector3UnitTest();
 
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -166,6 +168,9 @@ void printVector2(Math::Vector2 vec) {
 	cout <<"(" << vec.x << "," << vec.y << ")" << endl;
 }
 
+void printVector3(Math::Vector3 vec) {
+	cout << "(" << vec.x << ", " << vec.y<<", "<<vec.z<< ")" << endl;
+}
 
 
 void Vector2UnitTest() {
@@ -204,4 +209,46 @@ void Vector2UnitTest() {
 	Math::Vector2 incoming(-1, -1);
 	cout << "reflect : ";
 	printVector2(Math::Vector2::reflect(incoming, normal));
+}
+
+void Vector3UnitTest() {
+	cout << "=====================================\n";
+	using  Math::Vector3;
+	Vector3 forward = Vector3::forward;
+	cout << "V1";
+	printVector3(forward);
+	Vector3 right = Vector3::right;
+	cout << "V2";
+	printVector3(right);
+
+	Vector3 up = Vector3::cross(forward, right);
+	cout << "Cross Product:";
+	printVector3(up);
+
+	float upDownDelta = Vector3::angle(Vector3::up, Vector3::down);
+	cout << "Angle :" << upDownDelta << endl;
+
+	Vector3 RtoU = Vector3::cross(Vector3::right, Vector3::up);
+	cout << "RtoU";
+	printVector3(RtoU);
+
+	Vector3 UtoR = Vector3::cross(Vector3::up, Vector3::right);
+	cout << "UtoR";
+	printVector3(UtoR);
+
+	Vector3 FtoR = Vector3::cross(Vector3::forward, Vector3::right);
+	cout << "FtoR";
+	printVector3(FtoR);
+
+	//float sAF2R = Vector3::signedAngle(Vector3::forward, Vector3::right);
+	//cout << (sAF2R) << endl;;
+
+	//float sAF2L = Vector3::signedAngle(Vector3::forward, Vector3::left);
+	//cout << (sAF2L) << endl;;
+
+	float sAR2L = Vector3::signedAngle(Vector3::right, Vector3::left);
+	cout << (sAR2L) << endl;;
+
+	float sAL2R = Vector3::signedAngle(Vector3(-0.1,0,0), Vector3::right);
+	cout << (sAL2R) << endl;;
 }

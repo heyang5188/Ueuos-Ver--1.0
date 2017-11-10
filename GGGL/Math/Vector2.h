@@ -4,7 +4,6 @@ namespace Math {
 	class Vector2 {
 	public:
 		Vector2(float xx, float yy);
-		Vector2(const Vector2& rhs);
 
 		float magnitude();
 		Vector2 normalize();

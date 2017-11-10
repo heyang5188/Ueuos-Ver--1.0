@@ -154,6 +154,7 @@
     <ClInclude Include="DrawCommand\AbstractDrawCommand.h" />
     <ClInclude Include="DrawCommand\QuadCommand.h" />
     <ClInclude Include="DrawCommand\TriangeCommand.h" />
+    <ClInclude Include="Math\MathMacro.h" />
     <ClInclude Include="Math\Matrix.h" />
     <ClInclude Include="Math\Quaternion.h" />
     <ClInclude Include="Math\Transform.h" />
