@@ -21,18 +21,26 @@ void Vector2UnitTest();
 void Vector3UnitTest();
 //
 
+float trs[] = {
+	1.0,0.0,0.0,0.1,
+	0.0,1.2,0.0,0.3,
+	0.0,0.0,1.0,0.0,
+	0.0,0.0,0.0,1.0
+};
+
 
 using namespace std;
 vector<AbstractDrawCommand*> renderVector;
 
-const GLchar* vertexShaderSource = 
+const GLchar* vertexShaderSource =
 "#version 330 core\n"
 "layout (location = 0) in vec3 position;\n"
 "layout (location = 1) in vec4 color;\n"
+"uniform mat4 transform;\n"
 "out vec4 vertexColor;\n"
 "void main()\n"
 "{\n"
-"gl_Position = vec4(position.x, position.y, position.z, 1.0);\n"
+"gl_Position = transform*vec4(position.x, position.y, position.z, 1.0);\n"
 "vertexColor=color;"
 "}\0";
 const GLchar* fragmentShaderSource = 
@@ -152,7 +160,8 @@ int main()
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 		glUseProgram(glPro);		
-		
+		GLint tranformLoc = glGetUniformLocation(glPro,"transform");
+		glUniformMatrix4fv(tranformLoc,1,GL_TRUE,(GLfloat*)trs);
 		for (vector<AbstractDrawCommand*>::iterator it = renderVector.begin(); it != renderVector.end(); ++it) {
 			(*it)->doDraw();
 		}
@@ -214,31 +223,31 @@ void Vector2UnitTest() {
 void Vector3UnitTest() {
 	cout << "=====================================\n";
 	using  Math::Vector3;
-	Vector3 forward = Vector3::forward;
-	cout << "V1";
-	printVector3(forward);
-	Vector3 right = Vector3::right;
-	cout << "V2";
-	printVector3(right);
+	//Vector3 forward = Vector3::forward;
+	//cout << "V1";
+	//printVector3(forward);
+	//Vector3 right = Vector3::right;
+	//cout << "V2";
+	//printVector3(right);
 
-	Vector3 up = Vector3::cross(forward, right);
-	cout << "Cross Product:";
-	printVector3(up);
+	//Vector3 up = Vector3::cross(forward, right);
+	//cout << "Cross Product:";
+	//printVector3(up);
 
-	float upDownDelta = Vector3::angle(Vector3::up, Vector3::down);
-	cout << "Angle :" << upDownDelta << endl;
+	//float upDownDelta = Vector3::angle(Vector3::up, Vector3::down);
+	//cout << "Angle :" << upDownDelta << endl;
 
-	Vector3 RtoU = Vector3::cross(Vector3::right, Vector3::up);
-	cout << "RtoU";
-	printVector3(RtoU);
+	//Vector3 RtoU = Vector3::cross(Vector3::right, Vector3::up);
+	//cout << "RtoU";
+	//printVector3(RtoU);
 
-	Vector3 UtoR = Vector3::cross(Vector3::up, Vector3::right);
-	cout << "UtoR";
-	printVector3(UtoR);
+	//Vector3 UtoR = Vector3::cross(Vector3::up, Vector3::right);
+	//cout << "UtoR";
+	//printVector3(UtoR);
 
-	Vector3 FtoR = Vector3::cross(Vector3::forward, Vector3::right);
-	cout << "FtoR";
-	printVector3(FtoR);
+	//Vector3 FtoR = Vector3::cross(Vector3::forward, Vector3::right);
+	//cout << "FtoR";
+	//printVector3(FtoR);
 
 	//float sAF2R = Vector3::signedAngle(Vector3::forward, Vector3::right);
 	//cout << (sAF2R) << endl;;
@@ -246,9 +255,9 @@ void Vector3UnitTest() {
 	//float sAF2L = Vector3::signedAngle(Vector3::forward, Vector3::left);
 	//cout << (sAF2L) << endl;;
 
-	float sAR2L = Vector3::signedAngle(Vector3::right, Vector3::left);
-	cout << (sAR2L) << endl;;
+	//float sAR2L = Vector3::signedAngle(Vector3::right, Vector3::left);
+	//cout << (sAR2L) << endl;;
 
-	float sAL2R = Vector3::signedAngle(Vector3(-0.1,0,0), Vector3::right);
-	cout << (sAL2R) << endl;;
+	//float sAL2R = Vector3::signedAngle(Vector3(-1,0,0), Vector3::right);
+	//cout << (sAL2R) << endl;;
 }

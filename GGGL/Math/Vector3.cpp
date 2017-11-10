@@ -66,6 +66,14 @@ namespace Math {
 		Vector3 NorA = normalized(a);
 		Vector3 NorB = normalized(b);
 		float cosValue = dot(NorA,NorB);
+		if (cosValue==1.0f)
+		{
+			return 0;
+		}
+		if (cosValue == -1.0f)
+		{
+			return 180;
+		}
 		int sign = cross(NorA, NorB).y > 0 ? 1 : -1;
 		return RADIANS_TO_DEGREES(acos(cosValue))*sign;
 	}
