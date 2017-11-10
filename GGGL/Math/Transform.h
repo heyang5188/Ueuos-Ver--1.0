@@ -6,6 +6,7 @@ namespace Math {
 	public:
 		Transform(Vector3 pos,Vector3 rot,Vector3 scl):position(pos),rotation(rot), scale(scl) {
 		}
+
 		void addTo(Transform* trans);
 		Transform* getParent();
 
