@@ -2,10 +2,15 @@
 #include <memory>
 namespace Math {
 	class Matrix {
-	public:
+	public: 
+		Matrix(float data[16]) {
+			memcpy(m,data,sizeof(float)*16);
+		}
 		Matrix() {
 			memset(m,0,sizeof(float)*16);
 		}
+	public:
+		static Matrix indentity;
 
 	
 	public:

@@ -5,6 +5,7 @@ namespace Math {
 	class Transform {
 	public:
 		Transform(Vector3 pos,Vector3 rot,Vector3 scl):position(pos),rotation(rot), scale(scl) {
+
 		}
 
 		void addTo(Transform* trans);
@@ -15,7 +16,7 @@ namespace Math {
 		//void scale(Vector3 scale);
 
 	private:
-		Matrix getModelMatrix();
+		Matrix getModelView();
 	private:
 		Vector3 position;
 		Vector3 rotation;

@@ -1,6 +1,14 @@
 #include "Matrix.h"
+#include <iostream>
 
 namespace Math {
+	float indentityData[] = {
+		1.0,0.0,0.0,0.0,
+		0.0,1.0,0.0,0.0,
+		0.0,0.0,1.0,0.0,
+		0.0,0.0,0.0,1.0 };
+	Matrix Matrix::indentity = Matrix(indentityData);
+
 	Matrix Matrix::createPerspective(float left, float right, float top, float bottom, float near, float far) {
 		Matrix mat;
 		mat.m[0] = 2 * near / (right - left);
@@ -15,6 +23,15 @@ namespace Math {
 
 	Matrix Matrix::multiply(const Matrix& a, const Matrix& b) {
 		Matrix mat;
+		for (int i = 0; i < 16; ++i)
+		{
+			float value = 0.0;
+			for (int  j = 0; j < 4; ++j)
+			{
+				value += a.m[int(i / 4) * 4 + j] * b.m[j * 4 + (i % 4)];
+			}
+			mat.m[i] = value;
+		}
 		return mat;
 	}
 	

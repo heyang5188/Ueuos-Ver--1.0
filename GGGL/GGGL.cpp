@@ -9,12 +9,12 @@
 #include <queue>
 
 
-//#include "AbstractDrawCommand.h"
+////#include "AbstractDrawCommand.h"
 #include "DrawCommand/TriangeCommand.h"
 #include "DrawCommand/QuadCommand.h"
-#include "Math/Vector2.h"
-#include "Math/Vector3.h"
-
+//#include "Math/Vector2.h"
+//#include "Math/Vector3.h"
+#include "UMath.h"
 
 //TEST 
 void Vector2UnitTest();
@@ -110,6 +110,7 @@ GLuint genGLProgram() {
 
 int main()
 {
+
 	Vector3UnitTest();
 
 	glfwInit();
