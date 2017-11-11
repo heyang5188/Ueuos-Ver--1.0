@@ -1,25 +1,27 @@
 #pragma once
 #include "Matrix.h"
 #include "Vector3.h"
+#include "Quaternion.h"
+
 namespace Math {
 	class Transform {
 	public:
-		Transform(Vector3 pos,Vector3 rot,Vector3 scl):position(pos),rotation(rot), scale(scl) {
+		Transform(Vector3 pos,Vector3 rot,Vector3 scl):position(pos),rotation(Quaternion::identity), scale(scl) {
 
 		}
 
 		void addTo(Transform* trans);
 		Transform* getParent();
 
-		void translate(Vector3 vec);
-		//void rotate();
-		//void scale(Vector3 scale);
+		void doTranslate(Vector3 vec);
+		void doTotate();
+		void doScale(Vector3 scale);
 
 	private:
 		Matrix getModelView();
 	private:
 		Vector3 position;
-		Vector3 rotation;
+		Quaternion rotation;
 		Vector3 scale;
 		Transform* parentTransform;
 

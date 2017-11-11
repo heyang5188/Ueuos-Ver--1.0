@@ -2,8 +2,6 @@
 #include <math.h>
 #include <algorithm>
 
-#define M_PI 3.14159265358979323846
-#define RADIANS_TO_DEGREES(radians) ((radians) * (180.0 / M_PI))
 namespace Math {
 	const Vector3 Vector3::up(0.0f, 1.0f, 0.0f);
 	const Vector3 Vector3::back(0.0f,0.0f,-1.0f);

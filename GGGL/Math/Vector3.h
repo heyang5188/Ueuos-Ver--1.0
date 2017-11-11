@@ -1,8 +1,12 @@
+
 #pragma once
+#include "MathMacro.h"
+
 namespace Math {
 	class Vector3 {
 	public:
 		Vector3(float xx, float yy, float zz) :x(xx), y(yy), z(zz) {}
+		Vector3():x(0),y(0),z(0) {}
 
 		float magnitude() const;
 		Vector3& normalize();
