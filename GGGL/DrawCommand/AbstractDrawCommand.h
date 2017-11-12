@@ -5,6 +5,7 @@
 #include <GLFW/glfw3.h>
 #include <vector>
 #include "../Math/Transform.h"
+
 using namespace std;
 
 
@@ -60,7 +61,7 @@ struct VertexInfo
 class AbstractDrawCommand
 {
 public:
-	AbstractDrawCommand() : _vao(0){
+	AbstractDrawCommand() : _vao(0), _transform(){
 
 	}
 	virtual ~AbstractDrawCommand() {
@@ -75,11 +76,28 @@ public:
 	GLuint getVAO() { return _vao; }
 
 	virtual void doDraw() {};
+	Math::Matrix getModelMatrix() {
+		return _transform.getModelMatrix();
+	}
+
+	void translate(Math::Vector3 pos) {
+		_transform.doTranslate(pos);
+	}
+
+	void rotate(Math::Vector3 euler) {
+		_transform.doRotate(euler);
+	}
+
+	void scale(Math::Vector3 scale) {
+		_transform.doScale(scale);
+	}
+
+
 protected:
 	virtual void applyVertexData() {};
-
 protected:
 	GLuint _vao;
 protected:
 	vector<VertexInfo> _verties;
+	Math::Transform    _transform;
 };

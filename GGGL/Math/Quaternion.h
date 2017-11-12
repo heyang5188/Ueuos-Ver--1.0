@@ -59,7 +59,7 @@ namespace Math {
 		bool operator!=(const Quaternion& other) const;
 		Quaternion operator+(const Quaternion& other) const;
 		//?
-		Quaternion operator=(const Quaternion& other);
+		//Quaternion operator=(const Quaternion& other);
 		Quaternion operator=(const Matrix& matirx);
 
 

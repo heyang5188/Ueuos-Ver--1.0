@@ -12,6 +12,5 @@ public:
 	virtual void doDraw() override;
 protected:
 	virtual void applyVertexData();
-
 };
 
