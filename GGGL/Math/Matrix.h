@@ -20,6 +20,9 @@ namespace Math {
 	public:
 		Matrix operator*(const Matrix& mat);
 		Matrix& operator*=(const Matrix& mat);
+
+		float& operator[](int idx);
+
 	private:
 		float m[16];
 	};

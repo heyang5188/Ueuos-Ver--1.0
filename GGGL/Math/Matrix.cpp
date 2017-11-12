@@ -42,4 +42,8 @@ namespace Math {
 	Matrix& Matrix::operator*=(const Matrix& mat) {
 		return (*this);
 	}
+
+	float& Matrix::operator[](int idx) {
+		return m[idx];
+	}
 }

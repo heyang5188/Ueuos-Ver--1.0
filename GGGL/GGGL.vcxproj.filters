@@ -69,7 +69,10 @@
     <ClInclude Include="Math\MathMacro.h">
       <Filter>头文件\Math</Filter>
     </ClInclude>
-    <ClInclude Include="UMath.h">
+    <ClInclude Include="Math\TypeRedef.h">
+      <Filter>头文件\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\UMath.h">
       <Filter>头文件\Math</Filter>
     </ClInclude>
   </ItemGroup>

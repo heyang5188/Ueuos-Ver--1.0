@@ -1,4 +1,7 @@
 #pragma once
+
+typedef double f64
+
 #include "Math/Vector2.h"
 #include "Math/Vector3.h"
 #include "Math/MathMacro.h"

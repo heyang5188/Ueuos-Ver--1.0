@@ -19,6 +19,7 @@
 //TEST 
 void Vector2UnitTest();
 void Vector3UnitTest();
+void QuaternionUnitTest();
 //
 
 float trs[] = {
@@ -30,6 +31,8 @@ float trs[] = {
 
 
 using namespace std;
+
+
 vector<AbstractDrawCommand*> renderVector;
 
 const GLchar* vertexShaderSource =
@@ -111,7 +114,8 @@ GLuint genGLProgram() {
 int main()
 {
 
-	Vector3UnitTest();
+	//Vector3UnitTest();
+	QuaternionUnitTest();
 
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -153,16 +157,23 @@ int main()
 	vector<VertexInfo> data{v1,v2,v3};
 	tc.setVertexData(data);
 	QuadCommand quad = QuadCommand(Vector3(-0.5, 0.5), Vector3(-0.5, -0.5), Vector3(0.5, 0.5), Vector3(0.5, -0.5));
-	renderVector.push_back(&quad);
+	//renderVector.push_back(&quad);
 	renderVector.push_back(&tc);
+
+	float rot = 0.0f;
 	while (!glfwWindowShouldClose(window))
 	{
+		rot += 0.1;
+		Math::Quaternion eulerQuat(Math::Vector3(0, rot, 0));
+		Math::Vector3 euler1 = Math::Quaternion::euler(eulerQuat);
+		Math::Matrix mat = eulerQuat.getRotationMatrix();
+
 		glfwPollEvents();
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 		glUseProgram(glPro);		
 		GLint tranformLoc = glGetUniformLocation(glPro,"transform");
-		glUniformMatrix4fv(tranformLoc,1,GL_TRUE,(GLfloat*)trs);
+		glUniformMatrix4fv(tranformLoc,1,GL_TRUE,(GLfloat*)&mat[0]);
 		for (vector<AbstractDrawCommand*>::iterator it = renderVector.begin(); it != renderVector.end(); ++it) {
 			(*it)->doDraw();
 		}
@@ -182,6 +193,11 @@ void printVector3(Math::Vector3 vec) {
 	cout << "(" << vec.x << ", " << vec.y<<", "<<vec.z<< ")" << endl;
 }
 
+void printVector3AsEuler(Math::Vector3 rot) {
+	char buffer[128] = { 0 };
+	sprintf(buffer,"X:%f \nY:%f\nZ:%f\n",RADIANS_TO_DEGREES(rot.x),RADIANS_TO_DEGREES(rot.y),RADIANS_TO_DEGREES(rot.z));
+	cout << buffer << endl;
+}
 
 void Vector2UnitTest() {
 	Math::Vector2 v1(1, 1);
@@ -261,4 +277,18 @@ void Vector3UnitTest() {
 
 	//float sAL2R = Vector3::signedAngle(Vector3(-1,0,0), Vector3::right);
 	//cout << (sAL2R) << endl;;
+}
+
+void QuaternionUnitTest() {
+	using Math::Vector3;
+	using Math::Quaternion;
+	using Math::Matrix;
+
+	//Quaternion quat(0, 0, 0.577, 0.817);
+	//Vector3 euler = Quaternion::euler(quat);
+
+	Quaternion eulerQuat(Vector3(0, 90, 0));
+	Vector3 euler1 = Quaternion::euler(eulerQuat);
+	Matrix mat = eulerQuat.getRotationMatrix();
+	printVector3AsEuler(euler1);
 }
