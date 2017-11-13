@@ -42,6 +42,19 @@ namespace Math {
 		return transMat*rotMat*scaleMat;			
 	}
 
+	Matrix & Transform::getModelMatrix(Matrix & out)
+	{
+		memset(&out,0,sizeof(out));
+		Matrix scaleMat = Matrix();
+		makeScaleMatrix(scaleMat);
+		Matrix transMat = Matrix(Matrix::indentity);
+		makeTranslationMatrix(transMat);
+		Matrix rotMat = Matrix();
+		makeRotationMatrix(rotMat);
+		out = transMat*rotMat*scaleMat;
+		return out;
+	}
+
 	void Transform::makeScaleMatrix(Matrix & scaleMatrix)
 	{
 		scaleMatrix[0] = scale[0];

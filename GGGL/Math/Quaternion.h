@@ -61,7 +61,7 @@ namespace Math {
 		//?
 		//Quaternion operator=(const Quaternion& other);
 		Quaternion operator=(const Matrix& matirx);
-
+		Quaternion operator=(const Vector3& euler);
 
 		friend Quaternion operator*(const Quaternion& lhs, const Quaternion& rhs);
 

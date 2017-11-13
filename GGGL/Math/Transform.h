@@ -7,6 +7,11 @@
 namespace Math {
 	class Transform {
 	public:
+		Vector3 position;
+		Quaternion rotation;
+		Vector3 scale;
+		Transform* parentTransform;
+	public:
 		Transform():position(0,0,0),rotation(Quaternion::identity),scale(Vector3::one){}
 
 		Transform(Vector3 pos,Vector3 rot,Vector3 scl):position(pos),rotation(Quaternion(rot)), scale(scl) {
@@ -22,13 +27,8 @@ namespace Math {
 
 	public:
 		Matrix getModelMatrix();
+		Matrix& getModelMatrix(Matrix& out);
 	private:
-		Vector3 position;
-		Quaternion rotation;
-		Vector3 scale;
-		Transform* parentTransform;
-
-
 		void makeScaleMatrix(Matrix& scaleMatrix);
 		void makeTranslationMatrix(Matrix& transMatrix);
 		void makeRotationMatrix(Matrix& rotMatrix);

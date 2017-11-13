@@ -31,6 +31,24 @@
     <Filter Include="源文件\UeuosObject">
       <UniqueIdentifier>{29c36356-011d-4c5f-8303-77786e8b6826}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\UeuosObject\Base">
+      <UniqueIdentifier>{533a07b9-3fef-453e-bd91-1226423029a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\UeuosObject\Base">
+      <UniqueIdentifier>{f7659981-bb60-44f5-8bdf-9ea6c62daad0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\UeuosObject\SceneObject">
+      <UniqueIdentifier>{46715882-c55b-422d-b1df-01bd758e3bcd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\UeuosObject\SceneObject">
+      <UniqueIdentifier>{66c15e09-bc62-4f8d-9d3d-b103b5fdc881}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\UeuosObject\SceneObject\BaseGeometry">
+      <UniqueIdentifier>{4ff94a86-bb8c-4086-b5b3-35ef20f9f629}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\UeuosObject\SceneObject\BaseGeometry">
+      <UniqueIdentifier>{dbab71c5-e2d6-4f52-b353-7ba042b438a9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -75,6 +93,12 @@
     <ClInclude Include="Math\UMath.h">
       <Filter>头文件\Math</Filter>
     </ClInclude>
+    <ClInclude Include="UeuosObject\Base\UeuosObject.h">
+      <Filter>头文件\UeuosObject\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="UeuosObject\SceneObject\Camera.h">
+      <Filter>头文件\UeuosObject\SceneObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -103,6 +127,12 @@
     </ClCompile>
     <ClCompile Include="Math\Quaternion.cpp">
       <Filter>源文件\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="UeuosObject\Base\UeuosObject.cpp">
+      <Filter>源文件\UeuosObject\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="UeuosObject\SceneObject\Camera.cpp">
+      <Filter>源文件\UeuosObject\SceneObject</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

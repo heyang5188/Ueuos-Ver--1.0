@@ -198,6 +198,37 @@ namespace Math {
 		return quat;
 	}
 
+	Quaternion Quaternion::operator=(const Vector3 & euler)
+	{
+		f64 angle;
+
+		angle = 0.5*DEGREES_TO_RADIANS(euler.x);
+		const f64 sr = sin(angle);
+		const f64 cr = cos(angle);
+
+		angle = 0.5*DEGREES_TO_RADIANS(euler.y);
+		const f64 sp = sin(angle);
+		const f64 cp = cos(angle);
+
+		angle = 0.5*DEGREES_TO_RADIANS(euler.z);
+		const f64 sy = sin(angle);
+		const f64 cy = cos(angle);
+
+		const f64 cpcy = cp * cy;
+		const f64 spcy = sp * cy;
+		const f64 cpsy = cp * sy;
+		const f64 spsy = sp * sy;
+
+		x = (f32)(sr * cpcy - cr * spsy);
+		y = (f32)(cr * spcy + sr * cpsy);
+		z = (f32)(cr * cpsy - sr * spcy);
+		w = (f32)(cr * cpcy + sr * spsy);
+
+		normalize();
+
+		return Quaternion();
+	}
+
 	// (x0*i + y0*j + z0*k + w0)*(x1*i + y1*j + z1*k + w1)
 	// =
 	// i*(+x0*w1 + y0*z1 - z0*y1 + w0*x1) +
