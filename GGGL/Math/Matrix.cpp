@@ -36,33 +36,32 @@ namespace Math {
 
 
 	Matrix Matrix::lookAt(const Vector3& eye, const Vector3& target, const Vector3& up)
-	{
-
-		Vector3 z = Vector3::normalized(eye - target);
-		Vector3 x = Vector3::normalized(Vector3::cross(z, up));
-	//	Vector3 x(  (Vector3::cross(z, up).normalize()));
-		Vector3 y(Vector3::cross(x, z));
-
-		Matrix result;
-
-		result[0] = x.x;
-		result[4] = x.y;
-		result[8] = x.z;
-		result[12] = -Vector3::dot(x, eye);
-
-		result[1] = y.x;
-		result[5] = y.y;
-		result[9] = y.z;
-		result[13] = -Vector3::dot(y, eye);
-
-		result[2] = z.x;
-		result[6] = z.y;
-		result[10] = z.z;
-		result[14] = -Vector3::dot(z, eye);
-
-		result[3] = result[7] = result[11] = 0.0f;
-		result[15] = 1.0f;
-		return result;
+	{		
+		//View Plane Normal ,acting like Z-axis 
+		Vector3 VPN = target - eye;
+		Vector3 n = Vector3::normalized(VPN);
+		Vector3 Vup = Vector3::normalized(up);
+		//like X-axis
+		Vector3 u = Vector3::normalized(Vector3::cross(VPN, Vup));
+		//like Y 
+		Vector3 v = Vector3::normalized(Vector3::cross(u, n));
+		// A = TR --- > inverse(A) = inverse(TR) ---> inverse(A) = inverse(R)*inverse(T)
+		Matrix mat;
+		float inverseT[] = {
+			1.0,0.0,0.0,0.0,
+			0.0,1.0,0.0,0.0,
+			0.0,0.0,1.0,0.0,
+			eye.x,eye.y,eye.z,1.0 };
+		Matrix inverseTMat(inverseT);
+		float invserR[] = {
+			u.x,  u.y, u.z,0.0,
+			v.x,  v.y, v.z,0.0,
+			-n.x,-n.y,-n.z,0.0,
+			0.0,  0.0, 0.0,1.0
+		};
+		Matrix inverseRMat(invserR);
+		mat = inverseTMat*inverseRMat;
+		return mat;
 	}
 
 	Matrix Matrix::multiply(const Matrix& a, const Matrix& b) {
