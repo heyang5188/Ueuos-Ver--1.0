@@ -38,4 +38,8 @@ void UeuosObject::setScale(const Vector3& scale) {
 	transform.scale = scale;
 }
 
+void UeuosObject::draw() {
+	onDraw();
+}
+
 

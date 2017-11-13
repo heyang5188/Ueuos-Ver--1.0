@@ -49,6 +49,12 @@
     <Filter Include="头文件\UeuosObject\SceneObject\BaseGeometry">
       <UniqueIdentifier>{dbab71c5-e2d6-4f52-b353-7ba042b438a9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\Interfaces">
+      <UniqueIdentifier>{688b4a50-5a01-4870-a758-a37b6048053a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Iterfaces">
+      <UniqueIdentifier>{efd20023-addb-49ae-ab55-28f3d6a71315}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -90,14 +96,20 @@
     <ClInclude Include="Math\TypeRedef.h">
       <Filter>头文件\Math</Filter>
     </ClInclude>
-    <ClInclude Include="Math\UMath.h">
-      <Filter>头文件\Math</Filter>
-    </ClInclude>
     <ClInclude Include="UeuosObject\Base\UeuosObject.h">
       <Filter>头文件\UeuosObject\Base</Filter>
     </ClInclude>
     <ClInclude Include="UeuosObject\SceneObject\Camera.h">
       <Filter>头文件\UeuosObject\SceneObject</Filter>
+    </ClInclude>
+    <ClInclude Include="UeuosObject\SceneObject\BaseGeometry\Cube.h">
+      <Filter>头文件\UeuosObject\SceneObject\BaseGeometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Iterfaces\IVertexInterface.h">
+      <Filter>头文件\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\UMath.h">
+      <Filter>头文件\Math</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -133,6 +145,9 @@
     </ClCompile>
     <ClCompile Include="UeuosObject\SceneObject\Camera.cpp">
       <Filter>源文件\UeuosObject\SceneObject</Filter>
+    </ClCompile>
+    <ClCompile Include="UeuosObject\SceneObject\BaseGeometry\Cube.cpp">
+      <Filter>源文件\UeuosObject\SceneObject\BaseGeometry</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

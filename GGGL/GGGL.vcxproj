@@ -154,6 +154,7 @@
     <ClInclude Include="DrawCommand\AbstractDrawCommand.h" />
     <ClInclude Include="DrawCommand\QuadCommand.h" />
     <ClInclude Include="DrawCommand\TriangeCommand.h" />
+    <ClInclude Include="Iterfaces\IVertexInterface.h" />
     <ClInclude Include="Math\MathMacro.h" />
     <ClInclude Include="Math\Matrix.h" />
     <ClInclude Include="Math\Quaternion.h" />
@@ -165,6 +166,7 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="UeuosObject\Base\UeuosObject.h" />
+    <ClInclude Include="UeuosObject\SceneObject\BaseGeometry\Cube.h" />
     <ClInclude Include="UeuosObject\SceneObject\Camera.h" />
   </ItemGroup>
   <ItemGroup>
@@ -178,6 +180,7 @@
     <ClCompile Include="Math\Vector3.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="UeuosObject\Base\UeuosObject.cpp" />
+    <ClCompile Include="UeuosObject\SceneObject\BaseGeometry\Cube.cpp" />
     <ClCompile Include="UeuosObject\SceneObject\Camera.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
