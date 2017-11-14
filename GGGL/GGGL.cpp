@@ -61,8 +61,8 @@ const GLchar* fragmentShaderSource =
 "color = vertexColor;\n"
 "}\n\0";
 float x, y=0;
-float z = -50;
-Math::Matrix view = Math::Matrix::lookAt(Math::Vector3(x, y, z), Math::Vector3(0, 0, 1), Math::Vector3(0, 1, 0));
+float z = 400;
+Math::Matrix view = Math::Matrix::lookAt(Math::Vector3(x, y, z), Math::Vector3(0, 0, 0), Math::Vector3(0, 1, 0));
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
 {
 	// 当用户按下ESC键,我们设置window窗口的WindowShouldClose属性为true
@@ -72,23 +72,23 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	switch ( key )
 	{
 	case GLFW_KEY_UP:
-		y += 1;
+		y += 5;
 		break;
 	case GLFW_KEY_DOWN:
-		y -= 1;
+		y -= 5;
 		break;
 	case GLFW_KEY_LEFT:
-		x -= 1;
+		x -= 5;
 		break;
 	case GLFW_KEY_RIGHT:
-		x += 1;
+		x += 5;
 		break;
-	case GLFW_KEY_Q:
-		z += 1;
-		break;
-	case GLFW_KEY_S:
-		z -= 1;
-		break;
+	//case GLFW_KEY_Q:
+	//	z += 1;
+	//	break;
+	//case GLFW_KEY_S:
+	//	z -= 1;
+	//	break;
 	default:
 		break;
 	}
@@ -221,7 +221,7 @@ int main()
 	cube.setPostion(Math::Vector3(0, 0, -10));
 	//cube.setRotation(Math::Vector3(20,0,0));
 	Math::Matrix proj = Math::Matrix::createOrthographic(-400,400,300,-300,0.1,1000);
-//	Math::Matrix proj = Math::Matrix::createPerspective(-400, 400, 300,-300, 0.1, 1000);
+	//Math::Matrix proj = Math::Matrix::createPerspective(-400, 400, 300,-300, 0.1, 1000);
 
 	float rot = 0.0f;
 	float y = 0.0;
@@ -235,7 +235,7 @@ int main()
 		glCullFace(GL_BACK);
 		glfwPollEvents();
 		glLineWidth(1);
-	//	glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
+		glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 		glUseProgram(glPro);		

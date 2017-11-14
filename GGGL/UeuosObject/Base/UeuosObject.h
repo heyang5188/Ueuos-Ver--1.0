@@ -1,6 +1,5 @@
 #pragma once
 #include "../../Math/Transform.h"
-#include "../../Math/Quaternion.h"
 #include "../../Math/Matrix.h"
 #include "../../Iterfaces/IVertexInterface.h"
 
