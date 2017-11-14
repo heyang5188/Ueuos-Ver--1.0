@@ -69,13 +69,13 @@ namespace Math {
 		transMatrix[3] = position.x;
 		transMatrix[7] = position.y;
 		transMatrix[11] = position.z;
+		transMatrix[15] = 1.0;
 		// TODO: insert return statement here
 	}
 
 	void Transform::makeRotationMatrix(Matrix & rotMatrix)
 	{
 		rotMatrix = Quaternion(rotation).getRotationMatrix();
-		// TODO: insert return statement here
 	}
 
 }

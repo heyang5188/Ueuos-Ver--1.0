@@ -16,11 +16,14 @@
 //#include "Math/Vector3.h"
 #include "./Math/UMath.h"
 #include "./UeuosObject/SceneObject/BaseGeometry/Cube.h"
+#include "./UeuosObject/SceneObject/BaseGeometry/Pyramid.h"
 
 //TEST 
 void Vector2UnitTest();
 void Vector3UnitTest();
 void QuaternionUnitTest();
+void TransformUnitTest();
+void ViewMatrixUnitTest();
 //
 
 //float view[] = {
@@ -57,13 +60,39 @@ const GLchar* fragmentShaderSource =
 "{\n"
 "color = vertexColor;\n"
 "}\n\0";
-
+float x, y=0;
+float z = -50;
+Math::Matrix view = Math::Matrix::lookAt(Math::Vector3(x, y, z), Math::Vector3(0, 0, 1), Math::Vector3(0, 1, 0));
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
 {
 	// 当用户按下ESC键,我们设置window窗口的WindowShouldClose属性为true
 	// 关闭应用程序
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, GL_TRUE);
+	switch ( key )
+	{
+	case GLFW_KEY_UP:
+		y += 1;
+		break;
+	case GLFW_KEY_DOWN:
+		y -= 1;
+		break;
+	case GLFW_KEY_LEFT:
+		x -= 1;
+		break;
+	case GLFW_KEY_RIGHT:
+		x += 1;
+		break;
+	case GLFW_KEY_Q:
+		z += 1;
+		break;
+	case GLFW_KEY_S:
+		z -= 1;
+		break;
+	default:
+		break;
+	}
+	view = Math::Matrix::lookAt(Math::Vector3(x, y, z), Math::Vector3(0, 0, 1), Math::Vector3(0, 1, 0));
 }
 
 GLuint genShader(const char* source, GLenum shaderType) {
@@ -118,7 +147,10 @@ int main()
 {
 
 	//Vector3UnitTest();
-	QuaternionUnitTest();
+	//QuaternionUnitTest();
+	//TransformUnitTest();
+	//ViewMatrixUnitTest();
+	//return 1;
 
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -154,18 +186,19 @@ int main()
 	GLuint glPro = genGLProgram();
 
 	TriangeCommand tc = TriangeCommand();
-	VertexInfo v1 = VertexInfo(0.f, 0, 1.0f, 1.0, 0.0, 0.0);
-	VertexInfo v2 = VertexInfo(500, 0, 1.0f, 0.0, 1.0, 0.0);
-	VertexInfo v3 = VertexInfo(500, 500, 1.0f, 0.0, 0.0, 1.0);
+	VertexInfo v1 = VertexInfo(0.f, 0, 1.0f, 1.0, 1.0, 1.0);
+	VertexInfo v2 = VertexInfo(500, 0, 1.0f, 1.0, 1.0, 1.0);
+	VertexInfo v3 = VertexInfo(500, 500, 1.0f, 1.0, 1.0, 1.0);
 	vector<VertexInfo> data{ v1,v2,v3 };
-	tc.translate(Math::Vector3(-200, -200, 0));
+	tc.translate(Math::Vector3(-200, -200, 100));
 	tc.setVertexData(data);
+	tc.scale(Math::Vector3(0.1, 0.1, 0.1));
 	QuadCommand quad = QuadCommand(Vector3(-100, 100), Vector3(-100, -100), Vector3(100, 100), Vector3(100, -100));
-	renderVector.push_back(&quad);
+	//renderVector.push_back(&quad);
 	renderVector.push_back(&tc);
 //	tc.translate(Math::Vector3(0.0, -0.0, 0));
 //	tc.rotate(Math::Vector3(0, 0, 0));
-	tc.scale(Math::Vector3(50, 50, 0));
+	//tc.scale(Math::Vector3(50, 50, 0));
 //
 //	TriangeCommand tc1 = TriangeCommand();
 //	//vector<VertexInfo> data{v1,v2,v3};
@@ -184,34 +217,31 @@ int main()
 
 	Ueuos::Cube cube;
 
-	cube.setScale(Math::Vector3(300, 300, 300));
-	cube.setPostion(Math::Vector3(0, 0, 0));
+	cube.setScale(Math::Vector3(100, 100, 100));
+	cube.setPostion(Math::Vector3(0, 0, -10));
 	//cube.setRotation(Math::Vector3(20,0,0));
-	Math::Matrix proj = Math::Matrix::createOrthographic(-400,400,300,-300,0.1,2);
-	//Math::Matrix proj = Math::Matrix::createPerspective(0, 800, 600,0, .1, 1000);
+	Math::Matrix proj = Math::Matrix::createOrthographic(-400,400,300,-300,0.1,1000);
+//	Math::Matrix proj = Math::Matrix::createPerspective(-400, 400, 300,-300, 0.1, 1000);
+
 	float rot = 0.0f;
-	float z = 0.0;
+	float y = 0.0;
 	while (!glfwWindowShouldClose(window))
 	{
-
-		z += 1;
-		Math::Matrix view = Math::Matrix::lookAt(Math::Vector3(0,z,0), Math::Vector3(0, 0, 0), Math::Vector3(0, 1, 0));
-		rot += 0.01;
-		Math::Vector3 rot(20, rot, 0.0);
-		//cube.setRotation(rot);
-		//glEnable(GL_DEPTH_TEST);
-		//glDepthFunc(GL_ALWAYS);
-		//Math::Quaternion eulerQuat(Math::Vector3(0, rot, 0));
-		//Math::Vector3 euler1 = Math::Quaternion::euler(eulerQuat);
-		//Math::Matrix mat = eulerQuat.getRotationMatrix();
-		//glCullFace(GL_BACK);
+		//y += 0.5;
+	//	Math::Matrix view = Math::Matrix::lookAt(Math::Vector3(0, y, 10), Math::Vector3(0, 0, 1), Math::Vector3(0, 1, 0));
+		rot += .5;
+	//	cube.setRotation(Math::Vector3(50, 0, 0));
+		glEnable(GL_CULL_FACE);
+		glCullFace(GL_BACK);
 		glfwPollEvents();
+		glLineWidth(1);
+	//	glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 		glUseProgram(glPro);		
 
 	
-		//for (vector<AbstractDrawCommand*>::iterator it = renderVector.begin(); it != renderVector.end(); ++it) {
+		for (vector<AbstractDrawCommand*>::iterator it = renderVector.begin(); it != renderVector.end(); ++it) {
 			GLint tranformLoc = glGetUniformLocation(glPro, "transform");
 			GLint projLoc = glGetUniformLocation(glPro, "projection");
 			GLint viewLoc = glGetUniformLocation(glPro, "view");
@@ -221,8 +251,9 @@ int main()
 			glUniformMatrix4fv(projLoc, 1, GL_TRUE, (GLfloat*)&proj);
 			glUniformMatrix4fv(tranformLoc, 1, GL_TRUE, (GLfloat*)&cube.getModelMatrix());
 			cube.draw();
+			(*it)->rotate(Math::Vector3(rot,-rot, rot));
 			//(*it)->doDraw();
-		//}
+		}
 
 		glfwSwapBuffers(window);
 	}
@@ -283,6 +314,19 @@ void Vector2UnitTest() {
 	printVector2(Math::Vector2::reflect(incoming, normal));
 }
 
+void printMatrix(Math::Matrix mat) {
+	cout << "=====================\n";
+	for (int i = 0; i < 16; i++)
+	{
+		if (i > 0 && i % 4 == 0)
+		{
+			cout << endl;
+		}
+		printf("%.1f  ", mat[i]);
+	}
+	cout << "\n=====================\n";
+}
+
 void Vector3UnitTest() {
 	cout << "=====================================\n";
 	using  Math::Vector3;
@@ -337,4 +381,27 @@ void QuaternionUnitTest() {
 	Vector3 euler1 = Quaternion::euler(eulerQuat);
 	Matrix mat = eulerQuat.getRotationMatrix();
 	printVector3AsEuler(euler1);
+}
+
+void printTransform(Math::Transform trans) {
+	Math::Matrix mat = trans.getModelMatrix();
+	printMatrix(mat);
+}
+
+void TransformUnitTest() {
+	using namespace Math;
+	using Math::Vector3;
+	Math::Transform testTrans = Math::Transform();
+	testTrans.doTranslate(Math::Vector3(1, 1, 1));
+	testTrans.doScale(Vector3(2, 2, 2));
+	testTrans.doRotate(Vector3(0, 180, 0));
+	printTransform(testTrans);
+}
+
+
+void ViewMatrixUnitTest() {
+	using namespace Math;
+	using Math::Vector3;
+	Matrix viewMat = Matrix::lookAt(Vector3(0, 0,10), Vector3(0, 0, 0), Vector3(0, 1, 0));
+	printMatrix(viewMat);
 }

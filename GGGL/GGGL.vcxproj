@@ -167,6 +167,7 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="UeuosObject\Base\UeuosObject.h" />
     <ClInclude Include="UeuosObject\SceneObject\BaseGeometry\Cube.h" />
+    <ClInclude Include="UeuosObject\SceneObject\BaseGeometry\Pyramid.h" />
     <ClInclude Include="UeuosObject\SceneObject\Camera.h" />
   </ItemGroup>
   <ItemGroup>
@@ -181,6 +182,7 @@
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="UeuosObject\Base\UeuosObject.cpp" />
     <ClCompile Include="UeuosObject\SceneObject\BaseGeometry\Cube.cpp" />
+    <ClCompile Include="UeuosObject\SceneObject\BaseGeometry\Pyramid.cpp" />
     <ClCompile Include="UeuosObject\SceneObject\Camera.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

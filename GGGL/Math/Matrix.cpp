@@ -35,8 +35,9 @@ namespace Math {
 	}
 
 
-	Matrix Matrix::lookAt(const Vector3& eye, const Vector3& target, const Vector3& up)
+	Matrix Matrix::lookAt(const Math::Vector3& eye, const Vector3& target, const Vector3& up)
 	{		
+		using Math::Vector3;
 		//View Plane Normal ,acting like Z-axis 
 		Vector3 VPN = target - eye;
 		Vector3 n = Vector3::normalized(VPN);
@@ -48,19 +49,19 @@ namespace Math {
 		// A = TR --- > inverse(A) = inverse(TR) ---> inverse(A) = inverse(R)*inverse(T)
 		Matrix mat;
 		float inverseT[] = {
-			1.0,0.0,0.0,0.0,
-			0.0,1.0,0.0,0.0,
-			0.0,0.0,1.0,0.0,
-			eye.x,eye.y,eye.z,1.0 };
+			1.0,0.0,0.0,-eye.x,
+			0.0,1.0,0.0,-eye.y,
+			0.0,0.0,1.0,-eye.z,
+			0.0,0.0,0.0,1.0 };
 		Matrix inverseTMat(inverseT);
 		float invserR[] = {
-			u.x,  u.y, u.z,0.0,
-			v.x,  v.y, v.z,0.0,
-			-n.x,-n.y,-n.z,0.0,
+			u.x,  u.y, u.z,-Vector3::dot(eye,u),
+			v.x,  v.y, v.z,-Vector3::dot(eye,v),
+			n.x,n.y,n.z,Vector3::dot(eye,n),
 			0.0,  0.0, 0.0,1.0
 		};
 		Matrix inverseRMat(invserR);
-		mat = inverseTMat*inverseRMat;
+		mat = invserR;
 		return mat;
 	}
 

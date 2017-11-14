@@ -18,14 +18,14 @@ namespace Ueuos {
 		//	   /
 		//    / 
 		//   z
-		VertexInfo vi0 = VertexInfo(Vector3(0.5,0.5,0.5), Color4F(1.0, 1.0, 1.0, 1.0));
-		VertexInfo vi1 = VertexInfo(Vector3(-0.5, 0.5, 0.5), Color4F(1.0, 1.0, 1.0, 1.0));
-		VertexInfo vi2 = VertexInfo(Vector3(-0.5, -0.5, 0.5), Color4F(1.0, 1.0, 1.0, 1.0));
-		VertexInfo vi3 = VertexInfo(Vector3(0.5, -0.5, 0.5), Color4F(1.0, 1.0, 1.0, 1.0));
-		VertexInfo vi4 = VertexInfo(Vector3(0.5, -0.5, -0.5), Color4F(1.0, 1.0, 1.0, 1.0));
-		VertexInfo vi5 = VertexInfo(Vector3(0.5, 0.5, -0.5), Color4F(1.0, 1.0, 1.0, 1.0));
-		VertexInfo vi6 = VertexInfo(Vector3(-0.5, 0.5, -0.5), Color4F(1.0, 1.0, 1.0, 1.0));
-		VertexInfo vi7 = VertexInfo(Vector3(-0.5, -0.5, -0.5), Color4F(1.0, 1.0, 1.0, 1.0));
+		VertexInfo vi0 = VertexInfo(Vector3(0.5,0.5,0.5), Color4F(1.0, .0, .0, 1.0));
+		VertexInfo vi1 = VertexInfo(Vector3(-0.5, 0.5, 0.5), Color4F(1.0, .0, .0, 1.0));
+		VertexInfo vi2 = VertexInfo(Vector3(-0.5, -0.5, 0.5), Color4F(1.0, .0, .0, 1.0));
+		VertexInfo vi3 = VertexInfo(Vector3(0.5, -0.5, 0.5), Color4F(1.0, .0, .0, 1.0));
+		VertexInfo vi4 = VertexInfo(Vector3(0.5, -0.5, -0.5), Color4F(1.0, .0, 1.0, 1.0));
+		VertexInfo vi5 = VertexInfo(Vector3(0.5, 0.5, -0.5), Color4F(1.0, .0, 1.0, 1.0));
+		VertexInfo vi6 = VertexInfo(Vector3(-0.5, 0.5, -0.5), Color4F(1.0,.0, 1.0, 1.0));
+		VertexInfo vi7 = VertexInfo(Vector3(-0.5, -0.5, -0.5), Color4F(1.0, .0, 1.0, 1.0));
 
 		std::vector<VertexInfo> data = { vi0,vi1,vi2,vi3,vi4,vi5,vi6,vi7 };
 		_verties.swap(data);
@@ -50,17 +50,16 @@ namespace Ueuos {
 
 		glGenBuffers(1, &veo);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, veo);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLushort) * 3, indeies, GL_STATIC_DRAW);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLushort) * 36, indeies, GL_STATIC_DRAW);
 
 		glGenBuffers(1, &vbo);
-		glGenBuffers(1, &veo);
 		glBindVertexArray(vao);
 		glBindBuffer(GL_ARRAY_BUFFER, vbo);
 		
-		glBufferData(GL_ARRAY_BUFFER,sizeof(VertexInfo)*8,(const void*)&_verties[0],GL_STATIC_DRAW);
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(VertexInfo), 0);
+		glBufferData(GL_ARRAY_BUFFER,sizeof(Ueuos::VertexInfo)*8,(const void*)&_verties[0],GL_STATIC_DRAW);
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Ueuos::VertexInfo), 0);
 		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(VertexInfo), (GLvoid*)offsetof(VertexInfo, position));
+		glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(Ueuos::VertexInfo), (GLvoid*)offsetof(Ueuos::VertexInfo, color));
 		glEnableVertexAttribArray(1);
 
 
