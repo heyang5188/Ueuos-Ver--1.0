@@ -114,6 +114,9 @@
     <ClInclude Include="UeuosObject\SceneObject\BaseGeometry\Pyramid.h">
       <Filter>头文件\UeuosObject\SceneObject\BaseGeometry</Filter>
     </ClInclude>
+    <ClInclude Include="UeuosObject\SceneObject\Axis.h">
+      <Filter>源文件\UeuosObject\SceneObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -154,6 +157,9 @@
     </ClCompile>
     <ClCompile Include="UeuosObject\SceneObject\BaseGeometry\Pyramid.cpp">
       <Filter>源文件\UeuosObject\SceneObject\BaseGeometry</Filter>
+    </ClCompile>
+    <ClCompile Include="UeuosObject\SceneObject\Axis.cpp">
+      <Filter>源文件\UeuosObject\SceneObject</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

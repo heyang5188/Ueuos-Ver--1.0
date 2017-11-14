@@ -14,17 +14,17 @@ namespace Ueuos {
 		//		| |     | |
 		//		| |v7---|-|v4
 		//		|/      |/    ----->x
-		//		v2------v3  
+		//		v2------v3
 		//	   /
 		//    / 
 		//   z
 		VertexInfo vi0 = VertexInfo(Vector3(0.5,0.5,0.5), Color4F(1.0, .0, .0, 1.0));
-		VertexInfo vi1 = VertexInfo(Vector3(-0.5, 0.5, 0.5), Color4F(1.0, .0, .0, 1.0));
-		VertexInfo vi2 = VertexInfo(Vector3(-0.5, -0.5, 0.5), Color4F(1.0, .0, .0, 1.0));
-		VertexInfo vi3 = VertexInfo(Vector3(0.5, -0.5, 0.5), Color4F(1.0, .0, .0, 1.0));
+		VertexInfo vi1 = VertexInfo(Vector3(-0.5, 0.5, 0.5), Color4F(.0, 1.0, .0, 1.0));
+		VertexInfo vi2 = VertexInfo(Vector3(-0.5, -0.5, 0.5), Color4F(.0, .0, 1.0, 1.0));
+		VertexInfo vi3 = VertexInfo(Vector3(0.5, -0.5, 0.5), Color4F(1.0, 1.0, .0, 1.0));
 		VertexInfo vi4 = VertexInfo(Vector3(0.5, -0.5, -0.5), Color4F(1.0, .0, 1.0, 1.0));
-		VertexInfo vi5 = VertexInfo(Vector3(0.5, 0.5, -0.5), Color4F(1.0, .0, 1.0, 1.0));
-		VertexInfo vi6 = VertexInfo(Vector3(-0.5, 0.5, -0.5), Color4F(1.0,.0, 1.0, 1.0));
+		VertexInfo vi5 = VertexInfo(Vector3(0.5, 0.5, -0.5), Color4F(0.0, 1.0, 1.0, 1.0));
+		VertexInfo vi6 = VertexInfo(Vector3(-0.5, 0.5, -0.5), Color4F(1.0,1.0, 1.0, 1.0));
 		VertexInfo vi7 = VertexInfo(Vector3(-0.5, -0.5, -0.5), Color4F(1.0, .0, 1.0, 1.0));
 
 		std::vector<VertexInfo> data = { vi0,vi1,vi2,vi3,vi4,vi5,vi6,vi7 };

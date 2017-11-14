@@ -43,21 +43,15 @@ namespace Math {
 		Vector3 n = Vector3::normalized(VPN);
 		Vector3 Vup = Vector3::normalized(up);
 		//like X-axis
-		Vector3 u = Vector3::normalized(Vector3::cross(VPN, Vup));
+		Vector3 u = Vector3::normalized(Vector3::cross(n, Vup));
 		//like Y 
 		Vector3 v = Vector3::normalized(Vector3::cross(u, n));
 		// A = TR --- > inverse(A) = inverse(TR) ---> inverse(A) = inverse(R)*inverse(T)
 		Matrix mat;
-		float inverseT[] = {
-			1.0,0.0,0.0,-eye.x,
-			0.0,1.0,0.0,-eye.y,
-			0.0,0.0,1.0,-eye.z,
-			0.0,0.0,0.0,1.0 };
-		Matrix inverseTMat(inverseT);
 		float invserR[] = {
 			u.x,  u.y, u.z,-Vector3::dot(eye,u),
 			v.x,  v.y, v.z,-Vector3::dot(eye,v),
-			n.x,n.y,n.z,Vector3::dot(eye,n),
+			n.x,  n.y, n.z,Vector3::dot(eye,n),
 			0.0,  0.0, 0.0,1.0
 		};
 		Matrix inverseRMat(invserR);

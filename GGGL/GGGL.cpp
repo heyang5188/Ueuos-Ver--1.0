@@ -18,6 +18,8 @@
 #include "./UeuosObject/SceneObject/BaseGeometry/Cube.h"
 #include "./UeuosObject/SceneObject/BaseGeometry/Pyramid.h"
 
+#include "./UeuosObject/SceneObject/Axis.h"
+
 //TEST 
 void Vector2UnitTest();
 void Vector3UnitTest();
@@ -72,16 +74,16 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	switch ( key )
 	{
 	case GLFW_KEY_UP:
-		y += 5;
+		y += 10;
 		break;
 	case GLFW_KEY_DOWN:
-		y -= 5;
+		y -= 10;
 		break;
 	case GLFW_KEY_LEFT:
-		x -= 5;
+		x -= 10;
 		break;
 	case GLFW_KEY_RIGHT:
-		x += 5;
+		x += 10;
 		break;
 	//case GLFW_KEY_Q:
 	//	z += 1;
@@ -216,12 +218,15 @@ int main()
 //	renderVector.push_back(&tc2);
 
 	Ueuos::Cube cube;
+	Ueuos::Axis axis;
 
+	axis.setScale(Math::Vector3(500, 500, 500));
+	//axis.setRotation(Math::Vector3(0, 50, 0));
 	cube.setScale(Math::Vector3(100, 100, 100));
-	cube.setPostion(Math::Vector3(0, 0, -10));
+	//cube.setPostion(Math::Vector3(0, 0, 0));
 	//cube.setRotation(Math::Vector3(20,0,0));
 	Math::Matrix proj = Math::Matrix::createOrthographic(-400,400,300,-300,0.1,1000);
-	//Math::Matrix proj = Math::Matrix::createPerspective(-400, 400, 300,-300, 0.1, 1000);
+	//Math::Matrix proj = Math::Matrix::createPerspective(-800, 800, 300,-300, 0.1, 1000);
 
 	float rot = 0.0f;
 	float y = 0.0;
@@ -234,14 +239,14 @@ int main()
 		glEnable(GL_CULL_FACE);
 		glCullFace(GL_BACK);
 		glfwPollEvents();
-		glLineWidth(1);
-		glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
+		//glLineWidth(10);
+		//glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 		glUseProgram(glPro);		
 
 	
-		for (vector<AbstractDrawCommand*>::iterator it = renderVector.begin(); it != renderVector.end(); ++it) {
+		//for (vector<AbstractDrawCommand*>::iterator it = renderVector.begin(); it != renderVector.end(); ++it) {
 			GLint tranformLoc = glGetUniformLocation(glPro, "transform");
 			GLint projLoc = glGetUniformLocation(glPro, "projection");
 			GLint viewLoc = glGetUniformLocation(glPro, "view");
@@ -249,11 +254,13 @@ int main()
 			//glUniformMatrix4fv(tranformLoc, 1, GL_TRUE, (GLfloat*)&(*it)->getModelMatrix());
 			glUniformMatrix4fv(viewLoc, 1, GL_TRUE, (GLfloat*)&view);
 			glUniformMatrix4fv(projLoc, 1, GL_TRUE, (GLfloat*)&proj);
-			glUniformMatrix4fv(tranformLoc, 1, GL_TRUE, (GLfloat*)&cube.getModelMatrix());
-			cube.draw();
-			(*it)->rotate(Math::Vector3(rot,-rot, rot));
+			glUniformMatrix4fv(tranformLoc, 1, GL_TRUE, (GLfloat*)&axis.getModelMatrix());
+		//	cube.draw();
+			axis.draw();
+
+		//	(*it)->rotate(Math::Vector3(rot,-rot, rot));
 			//(*it)->doDraw();
-		}
+	//	}
 
 		glfwSwapBuffers(window);
 	}
