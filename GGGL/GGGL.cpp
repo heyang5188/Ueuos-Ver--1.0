@@ -45,13 +45,13 @@ const GLchar* vertexShaderSource =
 "#version 330 core\n"
 "layout (location = 0) in vec3 position;\n"
 "layout (location = 1) in vec4 color;\n"
-"uniform mat4 transform;\n"
-"uniform mat4 view;\n"
+//"uniform mat4 transform;\n"
+//"uniform mat4 view;\n"
 "uniform mat4 projection;\n"
 "out vec4 vertexColor;\n"
 "void main()\n"
 "{\n"
-"gl_Position = projection*view*transform*vec4(position.x, position.y, position.z, 1.0);\n"
+"gl_Position = projection*vec4(position.x, position.y, position.z, 1.0);\n"
 "vertexColor=color;"
 "}\0";
 const GLchar* fragmentShaderSource = 
@@ -62,8 +62,9 @@ const GLchar* fragmentShaderSource =
 "{\n"
 "color = vertexColor;\n"
 "}\n\0";
-float x, y=0;
-float z = 400;
+float x = 100;
+float y = 100;
+float z = 100;
 Math::Matrix view = Math::Matrix::lookAt(Math::Vector3(x, y, z), Math::Vector3(0, 0, 0), Math::Vector3(0, 1, 0));
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
 {
@@ -74,16 +75,16 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	switch ( key )
 	{
 	case GLFW_KEY_UP:
-		y += 10;
+		y += 2;
 		break;
 	case GLFW_KEY_DOWN:
-		y -= 10;
+		y -= 2;
 		break;
 	case GLFW_KEY_LEFT:
-		x -= 10;
+		x -= 2;
 		break;
 	case GLFW_KEY_RIGHT:
-		x += 10;
+		x += 2;
 		break;
 	//case GLFW_KEY_Q:
 	//	z += 1;
@@ -94,7 +95,7 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	default:
 		break;
 	}
-	view = Math::Matrix::lookAt(Math::Vector3(x, y, z), Math::Vector3(0, 0, 1), Math::Vector3(0, 1, 0));
+	view = Math::Matrix::lookAt(Math::Vector3(x, y, z), Math::Vector3(0, 0, 0), Math::Vector3(0, 1, 0));
 }
 
 GLuint genShader(const char* source, GLenum shaderType) {
@@ -188,14 +189,14 @@ int main()
 	GLuint glPro = genGLProgram();
 
 	TriangeCommand tc = TriangeCommand();
-	VertexInfo v1 = VertexInfo(0.f, 0, 1.0f, 1.0, 1.0, 1.0);
-	VertexInfo v2 = VertexInfo(500, 0, 1.0f, 1.0, 1.0, 1.0);
-	VertexInfo v3 = VertexInfo(500, 500, 1.0f, 1.0, 1.0, 1.0);
+	VertexInfo v1 = VertexInfo(0.f, 0, -.4f, 1.0, 1.0, 1.0);
+	VertexInfo v2 = VertexInfo(0.5, 0.0, -.4f, 1.0, 1.0, 1.0);
+	VertexInfo v3 = VertexInfo(0.5, .5, -.4f, 1.0, 1.0, 1.0);
 	vector<VertexInfo> data{ v1,v2,v3 };
-	tc.translate(Math::Vector3(-200, -200, 100));
+	//tc.translate(Math::Vector3(-200, -200, 100));
 	tc.setVertexData(data);
-	tc.scale(Math::Vector3(0.1, 0.1, 0.1));
-	QuadCommand quad = QuadCommand(Vector3(-100, 100), Vector3(-100, -100), Vector3(100, 100), Vector3(100, -100));
+	//tc.scale(Math::Vector3(0.1, 0.1, 0.1));
+	//QuadCommand quad = QuadCommand(Vector3(-100, 100), Vector3(-100, -100), Vector3(100, 100), Vector3(100, -100));
 	//renderVector.push_back(&quad);
 	renderVector.push_back(&tc);
 //	tc.translate(Math::Vector3(0.0, -0.0, 0));
@@ -217,27 +218,21 @@ int main()
 //
 //	renderVector.push_back(&tc2);
 
-	Ueuos::Cube cube;
-	Ueuos::Axis axis;
+	//Ueuos::Cube cube;
+	//Ueuos::Axis axis;
 
-	axis.setScale(Math::Vector3(500, 500, 500));
-	//axis.setRotation(Math::Vector3(0, 50, 0));
-	cube.setScale(Math::Vector3(100, 100, 100));
-	//cube.setPostion(Math::Vector3(0, 0, 0));
-	//cube.setRotation(Math::Vector3(20,0,0));
-	Math::Matrix proj = Math::Matrix::createOrthographic(-400,400,300,-300,0.1,1000);
-	//Math::Matrix proj = Math::Matrix::createPerspective(-800, 800, 300,-300, 0.1, 1000);
+	//axis.setScale(Math::Vector3(500, 500, 500));
+	////axis.setRotation(Math::Vector3(0, 50, 0));
+	//cube.setScale(Math::Vector3(50, 50, 50));
+	//cube.setPostion(Math::Vector3(100, 100, 100));
+	////cube.setRotation(Math::Vector3(20,0,0));
+	Math::Matrix proj = Math::Matrix::createOrthographic(-1,1,1,-1,-1,1);
+	//Math::Matrix proj = Math::Matrix::createPerspective(-1, 1,1,-1,-1,1);
 
 	float rot = 0.0f;
 	float y = 0.0;
 	while (!glfwWindowShouldClose(window))
 	{
-		//y += 0.5;
-	//	Math::Matrix view = Math::Matrix::lookAt(Math::Vector3(0, y, 10), Math::Vector3(0, 0, 1), Math::Vector3(0, 1, 0));
-		rot += .5;
-	//	cube.setRotation(Math::Vector3(50, 0, 0));
-		glEnable(GL_CULL_FACE);
-		glCullFace(GL_BACK);
 		glfwPollEvents();
 		//glLineWidth(10);
 		//glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
@@ -246,21 +241,23 @@ int main()
 		glUseProgram(glPro);		
 
 	
-		//for (vector<AbstractDrawCommand*>::iterator it = renderVector.begin(); it != renderVector.end(); ++it) {
-			GLint tranformLoc = glGetUniformLocation(glPro, "transform");
+		for (vector<AbstractDrawCommand*>::iterator it = renderVector.begin(); it != renderVector.end(); ++it) {
+		//	GLint tranformLoc = glGetUniformLocation(glPro, "transform");
 			GLint projLoc = glGetUniformLocation(glPro, "projection");
-			GLint viewLoc = glGetUniformLocation(glPro, "view");
+			//GLint viewLoc = glGetUniformLocation(glPro, "view");
 			//Math::Matrix m = (*it)->getModelMatrix();
 			//glUniformMatrix4fv(tranformLoc, 1, GL_TRUE, (GLfloat*)&(*it)->getModelMatrix());
-			glUniformMatrix4fv(viewLoc, 1, GL_TRUE, (GLfloat*)&view);
+			//glUniformMatrix4fv(viewLoc, 1, GL_TRUE, (GLfloat*)&view);
 			glUniformMatrix4fv(projLoc, 1, GL_TRUE, (GLfloat*)&proj);
-			glUniformMatrix4fv(tranformLoc, 1, GL_TRUE, (GLfloat*)&axis.getModelMatrix());
-		//	cube.draw();
-			axis.draw();
+			//glUniformMatrix4fv(tranformLoc, 1, GL_TRUE, (GLfloat*)&axis.getModelMatrix());
+		//	axis.draw();
+			//glUniformMatrix4fv(tranformLoc, 1, GL_TRUE, (GLfloat*)&cube.getModelMatrix());
+			//cube.draw();
+			
 
-		//	(*it)->rotate(Math::Vector3(rot,-rot, rot));
-			//(*it)->doDraw();
-	//	}
+			//(*it)->rotate(Math::Vector3(rot,-rot, rot));
+			(*it)->doDraw();
+		}
 
 		glfwSwapBuffers(window);
 	}

@@ -12,7 +12,7 @@ namespace Math {
 	Matrix Matrix::createPerspective(float left, float right, float top, float bottom, float near, float far) {
 		Matrix mat;
 		mat[0] = 2 * near / (right - left);
-		mat[3] = (right + left) / (right - left);
+		mat[2] = (right + left) / (right - left);
 		mat[5] = 2 * near / (top-bottom);
 		mat[6] = (top+bottom) / (top - bottom);
 		mat[10] = -(far + near) / (far - near);
