@@ -70,9 +70,9 @@ const GLchar* fragmentShaderSource =
 float x = 100;
 float y = 100;
 float z = 100;
-//Math::Matrix view = Math::Matrix::lookAt(Math::Vector3(x, y, z), Math::Vector3(0, 0, 0), Math::Vector3(0, 1, 0));
+Math::Matrix view = Math::Matrix::lookAt(Math::Vector3(x, y, z), Math::Vector3(0, 0, 0), Math::Vector3(0, 1, 0));
 
-glm::mat4 view = glm::lookAt(glm::vec3(x, y, z), glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 1.0, 0.0));
+//glm::mat4 view = glm::lookAt(glm::vec3(x, y, z), glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 1.0, 0.0));
 //float x11 = view[5];
 //int a = 0;
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
@@ -95,16 +95,16 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	case GLFW_KEY_RIGHT:
 		x += 2;
 		break;
-	//case GLFW_KEY_Q:
-	//	z += 1;
-	//	break;
-	//case GLFW_KEY_S:
-	//	z -= 1;
-	//	break;
+	case GLFW_KEY_Q:
+		z += 4;
+		break;
+	case GLFW_KEY_S:
+		z -= 4;
+		break;
 	default:
 		break;
 	}
-	//view = Math::Matrix::lookAt(Math::Vector3(x, y, z), Math::Vector3(0, 0, 0), Math::Vector3(0, 1, 0));
+	view = Math::Matrix::lookAt(Math::Vector3(x, y, z), Math::Vector3(0, 0, 0), Math::Vector3(0, 1, 0));
 }
 
 GLuint genShader(const char* source, GLenum shaderType) {
@@ -230,21 +230,22 @@ int main()
 	Ueuos::Cube cube;
 	Ueuos::Axis axis;
 	cube.setScale(Math::Vector3(30, 30, 30));
+	cube.setPostion(Math::Vector3(0, 50, 0));
 	axis.setScale(Math::Vector3(10000, 10000, 10000));
 	//axis.setRotation(Math::Vector3(0, 50, 0));
 //	cube.setScale(Math::Vector3(50, 50, 50));
 	//cube.setPostion(Math::Vector3(100, 100, 100));
 	//cube.setRotation(Math::Vector3(20,0,0));
-//	Math::Matrix proj = Math::Matrix::createOrthographic(-400,400,300,-300,0.1,100);
-	//Math::Matrix proj = Math::Matrix::createPerspective(-40, 40,30,-30,0.1,1000);
+	//Math::Matrix proj = Math::Matrix::createOrthographic(-400,400,300,-300,0.1, 1000);
+	//Math::Matrix proj = Math::Matrix::createPerspective(-400, 400,300,-300,0.1,1000);
 	glm::mat4 proj = glm::perspective(45.0f, 800.0f / 600.0f, 0.1f, 1000.0f);
-
+	//glm::mat4 proj = glm::ortho<float>(0, 400, 300, 0, 0.1, 1000);
 
 	float rot = 0.0f;
 	float y = 0.0;
 	while (!glfwWindowShouldClose(window))
 	{
-		y = y + 1;
+		y = y + 0.05;
 
 		cube.setRotation(Math::Vector3(0, y, 0));
 		
@@ -267,10 +268,10 @@ int main()
 			//glUniformMatrix4fv(tranformLoc, 1, GL_TRUE, (GLfloat*)&(*it)->getModelMatrix());
 			glUniformMatrix4fv(viewLoc, 1, GL_FALSE, (GLfloat*)&view);
 			glUniformMatrix4fv(projLoc, 1, GL_FALSE, (GLfloat*)&proj);
-			glUniformMatrix4fv(tranformLoc, 1, GL_TRUE, (GLfloat*)&axis.getModelMatrix());
+			glUniformMatrix4fv(tranformLoc, 1, GL_FALSE, (GLfloat*)&axis.getModelMatrix());
 			axis.draw();
-			glUniformMatrix4fv(tranformLoc, 1, GL_TRUE, (GLfloat*)&cube.getModelMatrix());
-			cube.draw();
+			//glUniformMatrix4fv(tranformLoc, 1, GL_FALSE, (GLfloat*)&cube.getModelMatrix());
+			//cube.draw();
 			
 
 			//(*it)->rotate(Math::Vector3(rot,-rot, rot));

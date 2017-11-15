@@ -131,15 +131,15 @@ namespace Math {
 		f32 W = quat.w;
 
 		dest[0] = (f32)1.0 - 2.0*Y*Y - 2.0*Z*Z;
-		dest[1] = (f32)2.0f*X*Y - 2.0f*Z*W;
-		dest[2] = (f32)2.0f*X*Z + 2.0f*Y*W;
+		dest[4] = (f32)2.0f*X*Y - 2.0f*Z*W;
+		dest[8] = (f32)2.0f*X*Z + 2.0f*Y*W;
 
-		dest[4] = (f32)2.0f*X*Y + 2.0f*Z*W;
+		dest[1] = (f32)2.0f*X*Y + 2.0f*Z*W;
 		dest[5] = (f32)1.0f - 2.0f*X*X - 2.0f*Z*Z;
-		dest[6] = (f32)2.0f*Z*Y - 2.0f*X*W;
+		dest[9] = (f32)2.0f*Z*Y - 2.0f*X*W;
 
-		dest[8] = (f32)2.0f*X*Z - 2.0f*Y*W;
-		dest[9] = (f32)2.0f*Z*Y + 2.0f*X*W;
+		dest[2] = (f32)2.0f*X*Z - 2.0f*Y*W;
+		dest[6] = (f32)2.0f*Z*Y + 2.0f*X*W;
 		dest[10] = (f32)1.0f - 2.0f*X*X - 2.0f*Y*Y;
 
 		dest[15] = 1.0f;

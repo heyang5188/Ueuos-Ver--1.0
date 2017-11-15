@@ -51,7 +51,7 @@ namespace Math {
 		makeTranslationMatrix(transMat);
 		Matrix rotMat = Matrix();
 		makeRotationMatrix(rotMat);
-		out = transMat*rotMat*scaleMat;
+		out = scaleMat*rotMat*transMat;
 		return out;
 	}
 
@@ -66,9 +66,9 @@ namespace Math {
 	void Transform::makeTranslationMatrix(Matrix & transMatrix)
 	{
 
-		transMatrix[3] = position.x;
-		transMatrix[7] = position.y;
-		transMatrix[11] = position.z;
+		transMatrix[12] = position.x;
+		transMatrix[13] = position.y;
+		transMatrix[14] = position.z;
 		transMatrix[15] = 1.0;
 		// TODO: insert return statement here
 	}

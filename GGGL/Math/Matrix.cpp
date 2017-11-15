@@ -12,12 +12,12 @@ namespace Math {
 	Matrix Matrix::createPerspective(float left, float right, float top, float bottom, float near, float far) {
 		Matrix mat;
 		mat[0] = 2 * near / (right - left);
-		mat[2] = (right + left) / (right - left);
+		mat[9] = (right + left) / (right - left);
 		mat[5] = 2 * near / (top-bottom);
-		mat[6] = (top+bottom) / (top - bottom);
+		mat[9] = (top+bottom) / (top - bottom);
 		mat[10] = -(far + near) / (far - near);
-		mat[11] = -2*far* near / (far - near);
-		mat[14] = -1;
+		mat[14] = -2*far* near / (far - near);
+		mat[11] = -1;
 		return mat;
 	}
 
@@ -38,6 +38,7 @@ namespace Math {
 	Matrix Matrix::lookAt(const Math::Vector3& eye, const Vector3& target, const Vector3& up)
 	{		
 		using Math::Vector3;
+
 		//View Plane Normal ,acting like Z-axis 
 		Vector3 VPN = target - eye;
 		Vector3 n = Vector3::normalized(VPN);
@@ -46,16 +47,16 @@ namespace Math {
 		Vector3 u = Vector3::normalized(Vector3::cross(n, Vup));
 		//like Y 
 		Vector3 v = Vector3::normalized(Vector3::cross(u, n));
-		// A = TR --- > inverse(A) = inverse(TR) ---> inverse(A) = inverse(R)*inverse(T)
+
 		Matrix mat;
-		float invserR[] = {
-			u.x,  u.y, u.z,-Vector3::dot(eye,u),
-			v.x,  v.y, v.z,-Vector3::dot(eye,v),
-			n.x,  n.y, n.z,Vector3::dot(eye,n),
-			0.0,  0.0, 0.0,1.0
+		float invser[] = {
+			u.x,  v.x, -n.x, 0,
+			u.y,  v.y, -n.y, 0,
+			u.z,  v.z, -n.z, 0,
+			-Vector3::dot(eye,u),-Vector3::dot(eye,v),  Vector3::dot(eye,n),1.0
 		};
-		Matrix inverseRMat(invserR);
-		mat = invserR;
+	//	Matrix inverseRMat(invserR);
+		mat = invser;
 		return mat;
 	}
 
