@@ -5,17 +5,21 @@
 
 namespace Ueuos {
 	using namespace Math;
-	class Camera{
+	using Math::Vector3;
+	class Camera {
 	public:
 		Camera();
 		
 		void setProjectionMatrix(const Matrix& mat);
 		void lookAt(const Vector3 & target, const Vector3 & up);
 		void setPosition(const Vector3& pos);
+		Vector3 getPosition();
 
-		Matrix getViewProjMat();
+		virtual Matrix getViewProjMat() = 0;
 
-	private:
+		public:
+		Vector3   up;
+		Vector3   target;
 		Transform transform;
 		Matrix    projection;
 		Matrix	  view;

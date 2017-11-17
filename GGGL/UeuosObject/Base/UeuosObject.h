@@ -11,6 +11,7 @@ namespace Ueuos {
 		
 		//set object's postion to newPostion
 		void setPostion(const Math::Vector3& newPostion);
+		Vector3 getPosition();
 		//set object's rotation to newRotation(euler)
 		void setRotation(const Math::Vector3&  euler);
 
@@ -21,13 +22,13 @@ namespace Ueuos {
 		//void scale(const Vector3& deltaScale);
 
 		void draw();
-
+		Transform& getTransform();
 		Matrix& getModelMatrix();
 
 	protected:
-		void updateModeMatrix();
+		void updateModelMatrix();
 		
-	private: 
+	protected:
 		Transform transform;
 		Matrix modelMatrix;
 		bool isModelDirty;

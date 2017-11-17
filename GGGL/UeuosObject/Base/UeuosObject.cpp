@@ -6,26 +6,31 @@ UeuosObject::UeuosObject() :
 	transform(),
 	isModelDirty(true)
 {
-	updateModeMatrix();
+	updateModelMatrix();
 }
 
 Matrix & Ueuos::UeuosObject::getModelMatrix()
 {
 	if (isModelDirty)
 	{
-		updateModeMatrix();
+		updateModelMatrix();
 		isModelDirty = false;
 	}
-	return modelMatrix;
+	return transform.modelMatrix;
 }
 
-void UeuosObject::updateModeMatrix() {
-	transform.getModelMatrix(modelMatrix);
+void UeuosObject::updateModelMatrix() {
+	transform.updateModleMatrix();
 }
 
 void UeuosObject::setPostion(const Vector3& newPostion) {
 	isModelDirty = true;
 	transform.position = newPostion;
+}
+
+Vector3 Ueuos::UeuosObject::getPosition()
+{
+	return transform.position;
 }
 
 void UeuosObject::setRotation(const Vector3& euler) {
@@ -40,6 +45,11 @@ void UeuosObject::setScale(const Vector3& scale) {
 
 void UeuosObject::draw() {
 	onDraw();
+}
+
+Transform & Ueuos::UeuosObject::getTransform()
+{
+	return transform;
 }
 
 

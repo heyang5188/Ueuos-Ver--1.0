@@ -15,14 +15,14 @@
 #include <glm/gtc/type_ptr.hpp>
 
 ////#include "AbstractDrawCommand.h"
-#include "DrawCommand/TriangeCommand.h"
-#include "DrawCommand/QuadCommand.h"
+//#include "DrawCommand/TriangeCommand.h"
+//#include "DrawCommand/QuadCommand.h"
 //#include "Math/Vector2.h"
 //#include "Math/Vector3.h"
 #include "./Math/UMath.h"
 #include "./UeuosObject/SceneObject/BaseGeometry/Cube.h"
 #include "./UeuosObject/SceneObject/BaseGeometry/Pyramid.h"
-
+#include "./UeuosObject/SceneObject/TargetCamera.h"
 #include "./UeuosObject/SceneObject/Axis.h"
 
 //TEST 
@@ -43,8 +43,7 @@ void ViewMatrixUnitTest();
 
 using namespace std;
 
-
-vector<AbstractDrawCommand*> renderVector;
+//vector<AbstractDrawCommand*> renderVector;
 
 const GLchar* vertexShaderSource =
 "#version 330 core\n"
@@ -53,10 +52,11 @@ const GLchar* vertexShaderSource =
 "uniform mat4 transform;\n"
 "uniform mat4 view;\n"
 "uniform mat4 projection;\n"
+"uniform mat4 pv;\n"
 "out vec4 vertexColor;\n"
 "void main()\n"
 "{\n"
-"gl_Position = projection*view*transform*vec4(position.x, position.y, position.z, 1.0);\n"
+"gl_Position = pv*transform*vec4(position.x, position.y, position.z, 1.0);\n"
 "vertexColor=color;"
 "}\0";
 const GLchar* fragmentShaderSource = 
@@ -70,11 +70,13 @@ const GLchar* fragmentShaderSource =
 float x = 100;
 float y = 100;
 float z = 100;
-Math::Matrix view = Math::Matrix::lookAt(Math::Vector3(x, y, z), Math::Vector3(0, 0, 0), Math::Vector3(0, 1, 0));
+//Math::Matrix view = Math::Matrix::lookAt(Math::Vector3(x, y, z), Math::Vector3(0, 0, 0), Math::Vector3(0, 1, 0));
 
 //glm::mat4 view = glm::lookAt(glm::vec3(x, y, z), glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 1.0, 0.0));
 //float x11 = view[5];
 //int a = 0;
+Ueuos::TargetCamera camera = Ueuos::TargetCamera();
+int scalar = 2.0f;
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
 {
 	// 当用户按下ESC键,我们设置window窗口的WindowShouldClose属性为true
@@ -85,15 +87,20 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	{
 	case GLFW_KEY_UP:
 		y += 2;
+		camera.transform.updateModleMatrix();
+		camera.setPosition(camera.getPosition()+camera.transform.getUp()*scalar);
 		break;
 	case GLFW_KEY_DOWN:
 		y -= 2;
+		camera.setPosition(camera.getPosition()- camera.transform.getUp()*scalar);
 		break;
 	case GLFW_KEY_LEFT:
 		x -= 2;
+		camera.setPosition(camera.getPosition()- camera.transform.getForward()*scalar);
 		break;
 	case GLFW_KEY_RIGHT:
 		x += 2;
+		camera.setPosition(camera.getPosition() + camera.transform.getForward()*scalar);
 		break;
 	case GLFW_KEY_Q:
 		z += 4;
@@ -104,7 +111,7 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	default:
 		break;
 	}
-	view = Math::Matrix::lookAt(Math::Vector3(x, y, z), Math::Vector3(0, 0, 0), Math::Vector3(0, 1, 0));
+	//view = Math::Matrix::lookAt(Math::Vector3(x, y, z), Math::Vector3(0, 0, 0), Math::Vector3(0, 1, 0));
 }
 
 GLuint genShader(const char* source, GLenum shaderType) {
@@ -158,11 +165,18 @@ GLuint genGLProgram() {
 int main()
 {
 
+	QuaternionUnitTest();
+	
+	camera.setPosition(Math::Vector3(300, 300, 300));
+	camera.lookAt(Math::Vector3(0, 0, 0));
 	//Vector3UnitTest();
 	//QuaternionUnitTest();
 	//TransformUnitTest();
 	//ViewMatrixUnitTest();
 	//return 1;
+	//Ueuos::TargetCamera camera = Ueuos::TargetCamera();
+	//camera.setPosition(Math::Vector3(0, 0, 100));
+	//camera.lookAt(Math::Vector3(0, 0, 0));
 
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -197,17 +211,17 @@ int main()
 
 	GLuint glPro = genGLProgram();
 
-	TriangeCommand tc = TriangeCommand();
-	VertexInfo v1 = VertexInfo(0.f, 0, 0, 2.0, 1.0, 1.0);
-	VertexInfo v2 = VertexInfo(0.5, 0.0, 0, 1.0, 1.0, 1.0);
-	VertexInfo v3 = VertexInfo(0.5, .5, 0, 1.0, 1.0, 1.0);
-	vector<VertexInfo> data{ v1,v2,v3 };
+	//TriangeCommand tc = TriangeCommand();
+	//VertexInfo v1 = VertexInfo(0.f, 0, 0, 2.0, 1.0, 1.0);
+	//VertexInfo v2 = VertexInfo(0.5, 0.0, 0, 1.0, 1.0, 1.0);
+	//VertexInfo v3 = VertexInfo(0.5, .5, 0, 1.0, 1.0, 1.0);
+	//vector<VertexInfo> data{ v1,v2,v3 };
 	//tc.translate(Math::Vector3(-200, -200, 100));
-	tc.setVertexData(data);
-	tc.scale(Math::Vector3(100, 100, 100));
+	//tc.setVertexData(data);
+	//tc.scale(Math::Vector3(100, 100, 100));
 	//QuadCommand quad = QuadCommand(Vector3(-100, 100), Vector3(-100, -100), Vector3(100, 100), Vector3(100, -100));
 	//renderVector.push_back(&quad);
-	renderVector.push_back(&tc);
+	//renderVector.push_back(&tc);
 //	tc.translate(Math::Vector3(0.0, -0.0, 0));
 //	tc.rotate(Math::Vector3(0, 0, 0));
 	//tc.scale(Math::Vector3(50, 50, 0));
@@ -230,24 +244,29 @@ int main()
 	Ueuos::Cube cube;
 	Ueuos::Axis axis;
 	cube.setScale(Math::Vector3(30, 30, 30));
-	cube.setPostion(Math::Vector3(0, 50, 0));
+	//cube.setPostion(Math::Vector3(0, 10, 0));
 	axis.setScale(Math::Vector3(10000, 10000, 10000));
 	//axis.setRotation(Math::Vector3(0, 50, 0));
 //	cube.setScale(Math::Vector3(50, 50, 50));
-	//cube.setPostion(Math::Vector3(100, 100, 100));
-	//cube.setRotation(Math::Vector3(20,0,0));
+	cube.setPostion(Math::Vector3(0, 12.5, 0));
+	//cube.setRotation(Math::Vector3(-90,0,0));
 	//Math::Matrix proj = Math::Matrix::createOrthographic(-400,400,300,-300,0.1, 1000);
 	//Math::Matrix proj = Math::Matrix::createPerspective(-400, 400,300,-300,0.1,1000);
 	glm::mat4 proj = glm::perspective(45.0f, 800.0f / 600.0f, 0.1f, 1000.0f);
-	//glm::mat4 proj = glm::ortho<float>(0, 400, 300, 0, 0.1, 1000);
+	Math::Matrix p1 = Math::Matrix::createPerspective(45.0f, 800.0f / 600.0f, 0.1, 1000);
+	//proj.value[0];
+	//Math::Matrix pM[] = {
 
+	//}
+
+	//glm::mat4 proj = glm::ortho<float>(0, 400, 300, 0, 0.1, 1000);
+	camera.setProjectionMatrix(p1);
 	float rot = 0.0f;
 	float y = 0.0;
 	while (!glfwWindowShouldClose(window))
 	{
-		y = y + 0.05;
+		y = y + 0.5;
 
-		cube.setRotation(Math::Vector3(0, y, 0));
 		
 		glEnable(GL_CULL_FACE);
 		glCullFace(GL_BACK);
@@ -262,16 +281,27 @@ int main()
 	
 		//for (vector<AbstractDrawCommand*>::iterator it = renderVector.begin(); it != renderVector.end(); ++it) {
 			GLint tranformLoc = glGetUniformLocation(glPro, "transform");
+			GLint mvLoc = glGetUniformLocation(glPro, "pv");
 			GLint projLoc = glGetUniformLocation(glPro, "projection");
 			GLint viewLoc = glGetUniformLocation(glPro, "view");
 			//Math::Matrix m = (*it)->getModelMatrix();
 			//glUniformMatrix4fv(tranformLoc, 1, GL_TRUE, (GLfloat*)&(*it)->getModelMatrix());
-			glUniformMatrix4fv(viewLoc, 1, GL_FALSE, (GLfloat*)&view);
-			glUniformMatrix4fv(projLoc, 1, GL_FALSE, (GLfloat*)&proj);
+			//camera.getViewProjMat();
+			//glUniformMatrix4fv(viewLoc, 1, GL_FALSE, (GLfloat*)&camera.view);
+			//glUniformMatrix4fv(projLoc, 1, GL_FALSE, (GLfloat*)&camera.projection);
+			glUniformMatrix4fv(mvLoc, 1, GL_FALSE, (GLfloat*)&camera.getViewProjMat());
 			glUniformMatrix4fv(tranformLoc, 1, GL_FALSE, (GLfloat*)&axis.getModelMatrix());
 			axis.draw();
-			//glUniformMatrix4fv(tranformLoc, 1, GL_FALSE, (GLfloat*)&cube.getModelMatrix());
-			//cube.draw();
+
+			//Math::Transform cubeFakeParentModelMatrix = Math::Transform();
+			//cubeFakeParentModelMatrix.doRotate(Math::Vector3(180, 0, 0));
+			//cubeFakeParentModelMatrix.doScale(Math::Vector3(0.1, .1, .1));
+			//cubeFakeParentModelMatrix.doTranslate(Math::Vector3(50, 0, 50));
+			Math::Matrix mat = cube.getModelMatrix();
+			glUniformMatrix4fv(tranformLoc, 1, GL_FALSE, (GLfloat*)&mat);
+			cube.setPostion(cube.getPosition() + cube.getTransform().getRight()*0.01);
+			//cube.setRotation(Math::Vector3(0, y, 0));
+			cube.draw();
 			
 
 			//(*it)->rotate(Math::Vector3(rot,-rot, rot));
@@ -400,7 +430,7 @@ void QuaternionUnitTest() {
 	//Quaternion quat(0, 0, 0.577, 0.817);
 	//Vector3 euler = Quaternion::euler(quat);
 
-	Quaternion eulerQuat(Vector3(720, 0, 0));
+	Quaternion eulerQuat(Vector3(0, -95, 0));
 	Vector3 euler1 = Quaternion::euler(eulerQuat);
 	Matrix mat = eulerQuat.getRotationMatrix();
 	printVector3AsEuler(euler1);

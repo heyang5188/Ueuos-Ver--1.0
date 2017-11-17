@@ -21,6 +21,20 @@ namespace Math {
 		return mat;
 	}
 
+	Matrix Matrix::createPerspective(float fov, float aspect, float near, float far)
+	{
+		Matrix rlt;
+		const float tanHalfFovy = tan(fov / 2);
+		rlt[0] = 1 / (aspect * tanHalfFovy);
+		rlt[5] = 1 / (tanHalfFovy);
+		rlt[10] = -(near + far) / (far - near);
+		rlt[11] = -1;
+		rlt[14] = -2 * far * near / (far - near);
+		
+
+		return rlt;
+	}
+
 	Matrix Matrix::createOrthographic(float l, float r, float t, float b, float n, float f)
 	{
 		Matrix mat;
@@ -28,7 +42,7 @@ namespace Math {
 		mat[3] = -(r + l) / (r - l);
 		mat[5] = 2 / (t - b);
 		mat[7] = -(t + b) / (t - b);
-		mat[10] = -2 / (f - n);
+		mat[10] = 2 / (f - n);
 		mat[11] = -(f + n) / (f - n);
 		mat[15] = 1;
 		return mat;
@@ -55,7 +69,6 @@ namespace Math {
 			u.z,  v.z, -n.z, 0,
 			-Vector3::dot(eye,u),-Vector3::dot(eye,v),  Vector3::dot(eye,n),1.0
 		};
-	//	Matrix inverseRMat(invserR);
 		mat = invser;
 		return mat;
 	}
