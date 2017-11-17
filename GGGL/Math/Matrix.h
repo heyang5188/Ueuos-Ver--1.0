@@ -16,6 +16,7 @@ namespace Math {
 	
 	public:
 		static Matrix createPerspective(float left, float right,float top, float bottom,float near, float far);
+		static Matrix createPerspective(float fov, float aspect, float near, float far);
 		static Matrix createOrthographic(float l, float r, float t, float b, float n, float f);
 		static Matrix multiply(const Matrix& a, const Matrix& b);
 

@@ -20,7 +20,6 @@ namespace Math {
 
 	void Transform::doRotate(Vector3 euler)
 	{
-		//this->rotation = Quaternion::identity;
 		rotation = Quaternion(euler);
 	}
 
@@ -29,30 +28,50 @@ namespace Math {
 		this->scale = scale;
 	}
 
+	Vector3 Transform::getUp()
+	{
+		return Vector3(modelMatrix[4],modelMatrix[5],modelMatrix[6]);
+	}
+
+	Vector3 Transform::getRight()
+	{
+		return Vector3(modelMatrix[0], modelMatrix[1], modelMatrix[2]);
+	}
+
+	Vector3 Transform::getForward()
+	{
+		return Vector3(modelMatrix[8], modelMatrix[9], modelMatrix[10]);
+	}
+
 	Matrix Transform::getModelMatrix()
 	{
-		//all zero 
 		Matrix scaleMat = Matrix();
 		makeScaleMatrix(scaleMat);
 		Matrix transMat = Matrix(Matrix::indentity);
 		makeTranslationMatrix(transMat);
 		Matrix rotMat = Matrix();
 		makeRotationMatrix(rotMat);
-
-		return transMat*rotMat*scaleMat;			
+		modelMatrix = scaleMat*rotMat*transMat;
+		return modelMatrix;
 	}
 
 	Matrix & Transform::getModelMatrix(Matrix & out)
 	{
-		memset(&out,0,sizeof(out));
+		memcpy(&out, &modelMatrix, sizeof(modelMatrix));
+		return out;
+	}
+
+	void Transform::updateModleMatrix()
+	{
+
 		Matrix scaleMat = Matrix();
 		makeScaleMatrix(scaleMat);
 		Matrix transMat = Matrix(Matrix::indentity);
 		makeTranslationMatrix(transMat);
 		Matrix rotMat = Matrix();
 		makeRotationMatrix(rotMat);
-		out = scaleMat*rotMat*transMat;
-		return out;
+		modelMatrix = scaleMat*rotMat*transMat;
+		
 	}
 
 	void Transform::makeScaleMatrix(Matrix & scaleMatrix)
@@ -70,7 +89,6 @@ namespace Math {
 		transMatrix[13] = position.y;
 		transMatrix[14] = position.z;
 		transMatrix[15] = 1.0;
-		// TODO: insert return statement here
 	}
 
 	void Transform::makeRotationMatrix(Matrix & rotMatrix)

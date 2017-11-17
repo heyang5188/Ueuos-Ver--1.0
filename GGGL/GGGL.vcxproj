@@ -170,6 +170,7 @@
     <ClInclude Include="UeuosObject\SceneObject\BaseGeometry\Cube.h" />
     <ClInclude Include="UeuosObject\SceneObject\BaseGeometry\Pyramid.h" />
     <ClInclude Include="UeuosObject\SceneObject\Camera.h" />
+    <ClInclude Include="UeuosObject\SceneObject\TargetCamera.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DrawCommand\QuadCommand.cpp" />
@@ -186,6 +187,7 @@
     <ClCompile Include="UeuosObject\SceneObject\BaseGeometry\Cube.cpp" />
     <ClCompile Include="UeuosObject\SceneObject\BaseGeometry\Pyramid.cpp" />
     <ClCompile Include="UeuosObject\SceneObject\Camera.cpp" />
+    <ClCompile Include="UeuosObject\SceneObject\TargetCamera.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

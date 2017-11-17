@@ -1,9 +1,18 @@
 #include "Camera.h"
 namespace Ueuos {
-	Camera::Camera(){}
+	Camera::Camera():transform(Vector3::zero,Vector3::zero,Vector3(1.0,1.0,1.0)){
+
+		transform.updateModleMatrix();
+	}
 
 	void Camera::setPosition(const Vector3& pos) {
 		transform.position = pos;
+		transform.updateModleMatrix();
+	}
+
+	Vector3 Camera::getPosition()
+	{
+		return transform.position;
 	}
 
 	void Camera::setProjectionMatrix(const Matrix& mat) {
@@ -11,16 +20,8 @@ namespace Ueuos {
 	}
 	
 	void Camera::lookAt(const Vector3& target,const Vector3& up) {
-		Vector3 VPN = target - transform.position;
-		Vector3 n = Vector3::normalized(VPN);
-		Vector3 nUp = Vector3::normalized(up);
-		//X
-		Vector3 u = Vector3::cross(nUp,n).normalize();
-		//Y
-		Vector3 v = Vector3::cross(n, u);
+		this->target = target;
 	}
 
-	Matrix getViewProj() {
-		return Matrix();
-	}
+	//void 
 }
