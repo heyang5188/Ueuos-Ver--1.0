@@ -120,7 +120,6 @@ namespace Math {
 
 	Matrix Quaternion::getRotationMatrix() const
 	{
-		typedef double f32;
 		Matrix dest = Matrix();
 
 		Quaternion quat(*this);

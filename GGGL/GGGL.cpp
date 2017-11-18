@@ -277,7 +277,7 @@ int main()
 //		camera.setPosition(Math::Vector3(camX, 100, camZ));
 		camera.lookAt(camera.transform.getForward());
 		
-		glEnable(GL_CULL_FACE|GL_DEPTH_TEST);
+		glEnable(GL_DEPTH_TEST);
 	//	glDepthFunc(GL_LESS);
 	//	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_DST_ALPHA);
 		//glCullFace(GL_BACK);
