@@ -114,10 +114,13 @@
     <ClInclude Include="UeuosObject\SceneObject\BaseGeometry\Pyramid.h">
       <Filter>头文件\UeuosObject\SceneObject\BaseGeometry</Filter>
     </ClInclude>
-    <ClInclude Include="UeuosObject\SceneObject\Axis.h">
-      <Filter>源文件\UeuosObject\SceneObject</Filter>
-    </ClInclude>
     <ClInclude Include="UeuosObject\SceneObject\TargetCamera.h">
+      <Filter>头文件\UeuosObject\SceneObject</Filter>
+    </ClInclude>
+    <ClInclude Include="UeuosObject\SceneObject\Axis.h">
+      <Filter>头文件\UeuosObject\SceneObject</Filter>
+    </ClInclude>
+    <ClInclude Include="UeuosObject\SceneObject\Grid.h">
       <Filter>头文件\UeuosObject\SceneObject</Filter>
     </ClInclude>
   </ItemGroup>
@@ -165,6 +168,9 @@
       <Filter>源文件\UeuosObject\SceneObject</Filter>
     </ClCompile>
     <ClCompile Include="UeuosObject\SceneObject\TargetCamera.cpp">
+      <Filter>源文件\UeuosObject\SceneObject</Filter>
+    </ClCompile>
+    <ClCompile Include="UeuosObject\SceneObject\Grid.cpp">
       <Filter>源文件\UeuosObject\SceneObject</Filter>
     </ClCompile>
   </ItemGroup>

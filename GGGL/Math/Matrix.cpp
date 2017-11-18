@@ -24,7 +24,7 @@ namespace Math {
 	Matrix Matrix::createPerspective(float fov, float aspect, float near, float far)
 	{
 		Matrix rlt;
-		const float tanHalfFovy = tan(fov / 2);
+		const float tanHalfFovy =  fabs (tan(fov / 2));
 		rlt[0] = 1 / (aspect * tanHalfFovy);
 		rlt[5] = 1 / (tanHalfFovy);
 		rlt[10] = -(near + far) / (far - near);

@@ -24,6 +24,7 @@
 #include "./UeuosObject/SceneObject/BaseGeometry/Pyramid.h"
 #include "./UeuosObject/SceneObject/TargetCamera.h"
 #include "./UeuosObject/SceneObject/Axis.h"
+#include "./UeuosObject/SceneObject/Grid.h"
 
 //TEST 
 void Vector2UnitTest();
@@ -87,26 +88,29 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	{
 	case GLFW_KEY_UP:
 		y += 2;
-		camera.transform.updateModleMatrix();
-		camera.setPosition(camera.getPosition()+camera.transform.getUp()*scalar);
+	//	camera.transform.updateModleMatrix();
+		camera.setPosition(camera.getPosition()+camera.transform.getForward()*scalar);
 		break;
 	case GLFW_KEY_DOWN:
-		y -= 2;
-		camera.setPosition(camera.getPosition()- camera.transform.getUp()*scalar);
+	//	y -= 2;
+		camera.setPosition(camera.getPosition()- camera.transform.getForward()*scalar);
 		break;
 	case GLFW_KEY_LEFT:
 		x -= 2;
-		camera.setPosition(camera.getPosition()- camera.transform.getForward()*scalar);
+		camera.setPosition(camera.getPosition()- camera.transform.getRight()*scalar);
 		break;
 	case GLFW_KEY_RIGHT:
 		x += 2;
-		camera.setPosition(camera.getPosition() + camera.transform.getForward()*scalar);
+		camera.setPosition(camera.getPosition() + camera.transform.getRight()*scalar);
 		break;
 	case GLFW_KEY_Q:
 		z += 4;
 		break;
 	case GLFW_KEY_S:
 		z -= 4;
+		break;
+	case GLFW_KEY_R:
+		camera.setPosition(Math::Vector3(100, 100, 100));
 		break;
 	default:
 		break;
@@ -167,7 +171,7 @@ int main()
 
 	QuaternionUnitTest();
 	
-	camera.setPosition(Math::Vector3(300, 300, 300));
+	camera.setPosition(Math::Vector3(0, 0, 100));
 	camera.lookAt(Math::Vector3(0, 0, 0));
 	//Vector3UnitTest();
 	//QuaternionUnitTest();
@@ -243,6 +247,7 @@ int main()
 
 	Ueuos::Cube cube;
 	Ueuos::Axis axis;
+	Ueuos::Grid grid(55,30);
 	cube.setScale(Math::Vector3(30, 30, 30));
 	//cube.setPostion(Math::Vector3(0, 10, 0));
 	axis.setScale(Math::Vector3(10000, 10000, 10000));
@@ -252,8 +257,8 @@ int main()
 	//cube.setRotation(Math::Vector3(-90,0,0));
 	//Math::Matrix proj = Math::Matrix::createOrthographic(-400,400,300,-300,0.1, 1000);
 	//Math::Matrix proj = Math::Matrix::createPerspective(-400, 400,300,-300,0.1,1000);
-	glm::mat4 proj = glm::perspective(45.0f, 800.0f / 600.0f, 0.1f, 1000.0f);
-	Math::Matrix p1 = Math::Matrix::createPerspective(45.0f, 800.0f / 600.0f, 0.1, 1000);
+	//glm::mat4 proj = glm::perspective(60.0f, 800.0f / 600.0f, 0.1f, 1000.0f);
+	Math::Matrix p1 = Math::Matrix::createPerspective(45, 800.0f / 600.0f, 0.1,10000);
 	//proj.value[0];
 	//Math::Matrix pM[] = {
 
@@ -265,17 +270,23 @@ int main()
 	float y = 0.0;
 	while (!glfwWindowShouldClose(window))
 	{
-		y = y + 0.5;
+		y = y + 0.0001;
 
+		float camX = sin(y)*100;
+		float camZ = cos(y) * 100;
+//		camera.setPosition(Math::Vector3(camX, 100, camZ));
+		camera.lookAt(camera.transform.getForward());
 		
-		glEnable(GL_CULL_FACE);
-		glCullFace(GL_BACK);
+		glEnable(GL_CULL_FACE|GL_DEPTH_TEST);
+	//	glDepthFunc(GL_LESS);
+	//	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_DST_ALPHA);
+		//glCullFace(GL_BACK);
 		
 		glfwPollEvents();
 		//glLineWidth(10);
 		//glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 		glUseProgram(glPro);		
 
 	
@@ -290,19 +301,24 @@ int main()
 			//glUniformMatrix4fv(viewLoc, 1, GL_FALSE, (GLfloat*)&camera.view);
 			//glUniformMatrix4fv(projLoc, 1, GL_FALSE, (GLfloat*)&camera.projection);
 			glUniformMatrix4fv(mvLoc, 1, GL_FALSE, (GLfloat*)&camera.getViewProjMat());
+
+
+			glUniformMatrix4fv(tranformLoc, 1, GL_FALSE, (GLfloat*)&grid.getModelMatrix());
+			grid.draw();
+
 			glUniformMatrix4fv(tranformLoc, 1, GL_FALSE, (GLfloat*)&axis.getModelMatrix());
 			axis.draw();
-
 			//Math::Transform cubeFakeParentModelMatrix = Math::Transform();
 			//cubeFakeParentModelMatrix.doRotate(Math::Vector3(180, 0, 0));
 			//cubeFakeParentModelMatrix.doScale(Math::Vector3(0.1, .1, .1));
 			//cubeFakeParentModelMatrix.doTranslate(Math::Vector3(50, 0, 50));
 			Math::Matrix mat = cube.getModelMatrix();
 			glUniformMatrix4fv(tranformLoc, 1, GL_FALSE, (GLfloat*)&mat);
-			cube.setPostion(cube.getPosition() + cube.getTransform().getRight()*0.01);
+		//	cube.setPostion(cube.getPosition() + cube.getTransform().getRight()*0.01);
 			//cube.setRotation(Math::Vector3(0, y, 0));
 			cube.draw();
-			
+
+
 
 			//(*it)->rotate(Math::Vector3(rot,-rot, rot));
 			//(*it)->doDraw();

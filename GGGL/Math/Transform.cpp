@@ -40,7 +40,7 @@ namespace Math {
 
 	Vector3 Transform::getForward()
 	{
-		return Vector3(modelMatrix[8], modelMatrix[9], modelMatrix[10]);
+		return Vector3(-modelMatrix[8], -modelMatrix[9], -modelMatrix[10]);
 	}
 
 	Matrix Transform::getModelMatrix()

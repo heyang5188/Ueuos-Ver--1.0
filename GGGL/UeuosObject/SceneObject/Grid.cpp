@@ -2,18 +2,34 @@
 
 
 namespace Ueuos {
-	Grid::Grid(int unitCount, float unitSize) {
+	Grid::Grid(int lineCount, float spacing) {
 		std::vector<VertexInfo> data;
 		//data.reserve(unitCount*unitCount * 4);
 		//VertexInfo 
-		VertexInfo v0 = VertexInfo(Vector3(0, 0, 0),Color4F(1.0,1.0,1.0,1.0));
-		VertexInfo v1 = VertexInfo(Vector3(0, 0,50), Color4F(1.0, 1.0, 1.0, 1.0));
-		VertexInfo v2 = VertexInfo(Vector3(50,0,50), Color4F(1.0, 1.0, 1.0, 1.0));
-		VertexInfo v3 = VertexInfo(Vector3(50, 0, 0), Color4F(1.0, 1.0, 1.0, 1.0));
-		data.push_back(v0);
-		data.push_back(v1);
-		data.push_back(v2);
-		data.push_back(v3);
+		if (lineCount%2==0)
+		{
+			lineCount++;
+		}
+		int mid = lineCount / 2;
+		float lineLen = (lineCount - 1)*spacing;
+		for (int i = 0; i < lineCount; ++i)
+		{
+			float pos = (i - mid)*spacing;
+			VertexInfo v0 = VertexInfo(Vector3(pos, 0, -lineLen/2), Color4F(1.0, 1.0, 1.0, .5));
+			VertexInfo v1 = VertexInfo(Vector3(pos, 0, lineLen/2), Color4F(1.0, 1.0, 1.0, .5));
+			data.push_back(v0);
+			data.push_back(v1);
+			VertexInfo v3 = VertexInfo(Vector3(-lineLen / 2, 0, pos), Color4F(1.0, 1.0, 1.0, .5));
+			VertexInfo v4 = VertexInfo(Vector3(lineLen / 2, 0, pos), Color4F(1.0, 1.0, 1.0, .5));
+			data.push_back(v3);
+			data.push_back(v4);
+		}
+
+
+		//data.push_back(v0);
+		//data.push_back(v1);
+		//data.push_back(v2);
+		//data.push_back(v3);
 		_verties.swap(data);
 		buferData(_verties);
 	}
@@ -26,7 +42,7 @@ namespace Ueuos {
 
 		glBindVertexArray(vao);
 		glBindBuffer(GL_ARRAY_BUFFER, vbo);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(VertexInfo) * 4, &_verties[0], GL_STATIC_DRAW);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(VertexInfo) * _verties.size(), &_verties[0], GL_STATIC_DRAW);
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(VertexInfo), 0);
 		glEnableVertexAttribArray(0);
 		glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(VertexInfo), (const void*)offsetof(VertexInfo, color));
@@ -39,7 +55,7 @@ namespace Ueuos {
 
 	void Grid::onDraw() {
 		glBindVertexArray(vao);
-		glDrawArrays(GL_TRIANGLES, 0, 3);
+		glDrawArrays(GL_LINES, 0, (GLsizei)_verties.size());
 		glBindVertexArray(0);
 	}
 }
