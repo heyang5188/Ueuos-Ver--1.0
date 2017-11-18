@@ -5,3 +5,5 @@ GGGL.VC.db
 .vs/GGGL/v14/.suo
 GGGL/Debug
 /.vs
+GGGL.sdf
+*.opensdf
