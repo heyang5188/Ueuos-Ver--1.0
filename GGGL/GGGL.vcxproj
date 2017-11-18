@@ -163,6 +163,9 @@
     <ClInclude Include="Math\UMath.h" />
     <ClInclude Include="Math\Vector2.h" />
     <ClInclude Include="Math\Vector3.h" />
+    <ClInclude Include="Rendering\GLProgram.h" />
+    <ClInclude Include="Rendering\GLProgramHelper.h" />
+    <ClInclude Include="Rendering\Material.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="UeuosObject\Base\UeuosObject.h" />
@@ -182,6 +185,9 @@
     <ClCompile Include="Math\Transform.cpp" />
     <ClCompile Include="Math\Vector2.cpp" />
     <ClCompile Include="Math\Vector3.cpp" />
+    <ClCompile Include="Rendering\GLProgram.cpp" />
+    <ClCompile Include="Rendering\GLProgramHelper.cpp" />
+    <ClCompile Include="Rendering\Material.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="UeuosObject\Base\UeuosObject.cpp" />
     <ClCompile Include="UeuosObject\SceneObject\Axis.cpp" />

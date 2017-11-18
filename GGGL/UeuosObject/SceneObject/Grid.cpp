@@ -15,12 +15,12 @@ namespace Ueuos {
 		for (int i = 0; i < lineCount; ++i)
 		{
 			float pos = (i - mid)*spacing;
-			VertexInfo v0 = VertexInfo(Vector3(pos, 0, -lineLen/2), Color4F(1.0, 1.0, 1.0, .5));
-			VertexInfo v1 = VertexInfo(Vector3(pos, 0, lineLen/2), Color4F(1.0, 1.0, 1.0, .5));
+			VertexInfo v0 = VertexInfo(Vector3(pos, 0, -lineLen/2), Color4F(.5, .5, .5, .5));
+			VertexInfo v1 = VertexInfo(Vector3(pos, 0, lineLen/2), Color4F(.5, .5, .5, .5));
 			data.push_back(v0);
 			data.push_back(v1);
-			VertexInfo v3 = VertexInfo(Vector3(-lineLen / 2, 0, pos), Color4F(1.0, 1.0, 1.0, .5));
-			VertexInfo v4 = VertexInfo(Vector3(lineLen / 2, 0, pos), Color4F(1.0, 1.0, 1.0, .5));
+			VertexInfo v3 = VertexInfo(Vector3(-lineLen / 2, 0, pos), Color4F(.5, .5, .5, .5));
+			VertexInfo v4 = VertexInfo(Vector3(lineLen / 2, 0, pos), Color4F(.5, .5, .5, .5));
 			data.push_back(v3);
 			data.push_back(v4);
 		}

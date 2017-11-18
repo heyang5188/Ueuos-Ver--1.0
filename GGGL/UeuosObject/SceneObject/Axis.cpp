@@ -37,9 +37,11 @@ namespace Ueuos {
 	}
 
 	void Axis::onDraw() {
+		glLineWidth(10);
 		glBindVertexArray(vao);
 		glDrawArrays(GL_LINES, 0, 6);
 		glBindVertexArray(0);
+		glLineWidth(1);
 	}
 
 }
