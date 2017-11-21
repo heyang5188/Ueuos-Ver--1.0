@@ -7,10 +7,21 @@ namespace Math {
 		parentTransform = trans;
 	}
 
+	void Transform::addChild(Transform * child)
+	{
+		children.push_back(child);
+		child->parentTransform = this;
+	}
+
 	Transform * Transform::getParent()
 	{
 		return parentTransform;
 		return nullptr;
+	}
+
+	std::vector<Transform*> Transform::getChildren()
+	{
+		return children;
 	}
 
 	void Transform::doTranslate(Vector3 vec)

@@ -4,13 +4,13 @@ namespace Ueuos {
 	{
 		//RED X
 		VertexInfo originX = VertexInfo(Vector3(0, 0, 0), Color4F(1.0, 0.0, 0.0, 1.0));
-		VertexInfo endX    = VertexInfo(Vector3(1, 0, 0), Color4F(1.0, 0.0, 0.0, 1.0));
+		VertexInfo endX    = VertexInfo(Vector3(100, 0, 0), Color4F(1.0, 0.0, 0.0, 1.0));
 		//Green Y
 		VertexInfo originY = VertexInfo(Vector3(0, 0, 0), Color4F(0.0, 1.0, 0.0, 1.0));
-		VertexInfo endY = VertexInfo(Vector3(0, 1, 0), Color4F(0.0, 1.0, 0.0, 1.0));
+		VertexInfo endY = VertexInfo(Vector3(0, 100, 0), Color4F(0.0, 1.0, 0.0, 1.0));
 		//Blue Z or
 		VertexInfo originZ = VertexInfo(Vector3(0, 0, 0), Color4F(0.0, 0.0, 1.0, 1.0));
-		VertexInfo endZ = VertexInfo(Vector3(0, 0, 1), Color4F(0.0, 0.0, 1.0, 1.0));
+		VertexInfo endZ = VertexInfo(Vector3(0, 0, 100), Color4F(0.0, 0.0, 1.0, 1.0));
 
 		std::vector<VertexInfo> data = { originX,endX,originY,endY,originZ,endZ };
 		
@@ -36,12 +36,22 @@ namespace Ueuos {
 		glBindVertexArray(0);
 	}
 
-	void Axis::onDraw() {
+	void Axis::onDraw(const Matrix& parentMatrix) {
+		//glUseProgram(getGLProgram()->program);
+		//GLint tranformLoc = glGetUniformLocation(getGLProgram()->program, "transform");
+		//glUniformMatrix4fv(tranformLoc, 1, GL_FALSE, (GLfloat*)&getModelMatrix());
 		glLineWidth(10);
 		glBindVertexArray(vao);
 		glDrawArrays(GL_LINES, 0, 6);
 		glBindVertexArray(0);
 		glLineWidth(1);
+		//glUseProgram(getGLProgram()->program);
+		//GLint tranformLoc = glGetUniformLocation(getGLProgram()->program, "transform");
+		//glUniformMatrix4fv(tranformLoc, 1, GL_FALSE, (GLfloat*)&getModelMatrix());
+/*		glBindVertexArray(vao);
+		glDrawArrays(GL_LINES, 0, 6);
+		glBindVertexArray(0)*/;
+		//glUseProgram(0);
 	}
 
 }

@@ -6,7 +6,7 @@ namespace Ueuos {
 		Axis();
 
 		virtual void buferData(std::vector<VertexInfo>& data);
-		virtual void onDraw();
+		virtual void onDraw(const Matrix& parentMatrix);
 	private:
 		
 	};

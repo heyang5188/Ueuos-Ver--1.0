@@ -2,6 +2,7 @@
 
 #include <GL/glew.h>
 
+
 namespace Ueuos {
 	enum class ShaderType {
 		SHADER_TYPE_VERTEX,
@@ -14,7 +15,7 @@ namespace Ueuos {
 	private:
 		GLuint genShader(const char* source, ShaderType type);
 
-	private:
+	public:
 		GLuint program;
 	};
 }

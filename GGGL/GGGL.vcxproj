@@ -175,11 +175,13 @@
     <ClInclude Include="UeuosObject\SceneObject\Camera.h" />
     <ClInclude Include="UeuosObject\SceneObject\Grid.h" />
     <ClInclude Include="UeuosObject\SceneObject\TargetCamera.h" />
+    <ClInclude Include="UeuosObject\SceneObject\World.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DrawCommand\QuadCommand.cpp" />
     <ClCompile Include="DrawCommand\TriangeCommand.cpp" />
     <ClCompile Include="GGGL.cpp" />
+    <ClCompile Include="Iterfaces\IVertexInterface.cpp" />
     <ClCompile Include="Math\Matrix.cpp" />
     <ClCompile Include="Math\Quaternion.cpp" />
     <ClCompile Include="Math\Transform.cpp" />
@@ -196,6 +198,7 @@
     <ClCompile Include="UeuosObject\SceneObject\Camera.cpp" />
     <ClCompile Include="UeuosObject\SceneObject\Grid.cpp" />
     <ClCompile Include="UeuosObject\SceneObject\TargetCamera.cpp" />
+    <ClCompile Include="UeuosObject\SceneObject\World.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

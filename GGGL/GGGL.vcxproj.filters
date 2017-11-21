@@ -138,6 +138,9 @@
     <ClInclude Include="Rendering\Material.h">
       <Filter>头文件\Rendering</Filter>
     </ClInclude>
+    <ClInclude Include="UeuosObject\SceneObject\World.h">
+      <Filter>头文件\UeuosObject\SceneObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -196,6 +199,12 @@
     </ClCompile>
     <ClCompile Include="Rendering\Material.cpp">
       <Filter>源文件\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="UeuosObject\SceneObject\World.cpp">
+      <Filter>源文件\UeuosObject\SceneObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Iterfaces\IVertexInterface.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
