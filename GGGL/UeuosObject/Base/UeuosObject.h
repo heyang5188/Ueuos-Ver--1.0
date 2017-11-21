@@ -2,7 +2,6 @@
 #include "../../Math/Transform.h"
 #include "../../Math/Matrix.h"
 #include "../../Iterfaces/IVertexInterface.h"
-
 namespace Ueuos {
 	using namespace Math;
 	class UeuosObject : public IVertexInterface{
@@ -21,14 +20,19 @@ namespace Ueuos {
 		//void rotate(const Vector3& deltaEuler);
 		//void scale(const Vector3& deltaScale);
 
-		void draw();
+		virtual void draw();
+		virtual void draw(const Matrix& parentMatrix);
 		Transform& getTransform();
 		Matrix& getModelMatrix();
+
+		void addChild(Transform* child);
+
+
 
 	protected:
 		void updateModelMatrix();
 		
-	protected:
+	public:
 		Transform transform;
 		Matrix modelMatrix;
 		bool isModelDirty;

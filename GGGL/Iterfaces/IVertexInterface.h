@@ -6,6 +6,8 @@
 #include <vector>
 #include <memory>
 #include <GL/glew.h>
+#include "../Math/Matrix.h"
+#include "../Rendering/GLProgramHelper.h"
 
 namespace Ueuos {
 	using namespace Math;
@@ -38,10 +40,16 @@ namespace Ueuos {
 	class IVertexInterface {
 	public:
 		//virtu
+		IVertexInterface();
 		virtual ~IVertexInterface() {}
 		virtual void buferData(std::vector<VertexInfo>& data)=0;
-		virtual void onDraw()=0;
+		virtual void onDraw(const Matrix& parentMatrix)=0;
+
+		void setGLProgram(GLProgram* pro) { glProgram = pro; }
+		GLProgram* getGLProgram() { return glProgram; }
+
 	protected:
+		GLProgram* glProgram;
 		std::vector<VertexInfo> _verties;
 		GLuint vao;
 	};

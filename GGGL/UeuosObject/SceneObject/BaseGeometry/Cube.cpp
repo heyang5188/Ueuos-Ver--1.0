@@ -68,7 +68,7 @@ namespace Ueuos {
 		glBindVertexArray(0);
 	}
 
-	void Ueuos::Cube::onDraw()
+	void Ueuos::Cube::onDraw(const Matrix& parentMatrix)
 	{
 		glBindVertexArray(vao);
 		//glDrawArrays(GL_TRIANGLES, 0, 36);

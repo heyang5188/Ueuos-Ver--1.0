@@ -50,7 +50,7 @@ namespace Ueuos {
 		glBindVertexArray(0);
 	}
 
-	void Pyramid::onDraw()
+	void Pyramid::onDraw(const Matrix& parentMatrix)
 	{
 		glBindVertexArray(vao);
 		//glDrawArrays(GL_TRIANGLES, 0, 36);

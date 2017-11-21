@@ -1,10 +1,24 @@
 #include "GLProgram.h"
 #include <cstdlib>
+#include <stdio.h>
+// GLEW
+#define GLEW_STATIC
+#include <GL/glew.h>
+
+#define CHECK_GL_ERROR_DEBUG() \
+    do { \
+        GLenum __error = glGetError(); \
+        if(__error) { \
+            printf("OpenGL error 0x%04X in %s %s %d\n", __error, __FILE__, __FUNCTION__, __LINE__); \
+        } \
+    } while (false)
+
 
 namespace Ueuos {
-	GLProgram::GLProgram(const char * vertexShader, const char * fragShader)
+	GLProgram::GLProgram(const char * vertexShader, const char * fragShader):program(0)
 	{
-		GLuint program = glCreateProgram();
+		program = 0;
+		program = glCreateProgram();
 		GLuint vshader = genShader(vertexShader, ShaderType::SHADER_TYPE_VERTEX);
 		GLuint fshader = genShader(fragShader, ShaderType::SHADER_TYPE_FRAGMENT);
 		
@@ -19,8 +33,9 @@ namespace Ueuos {
 		{
 			glGetProgramInfoLog(program, 512, NULL, info);
 		}
-		glDeleteShader(vshader);
-		glDeleteShader(fshader);
+		CHECK_GL_ERROR_DEBUG();
+		//glDeleteShader(vshader);
+		//glDeleteShader(fshader);
 	}
 
 	GLuint GLProgram::genShader(const char * source, ShaderType type)

@@ -53,9 +53,11 @@ namespace Ueuos {
 	}
 
 
-	void Grid::onDraw() {
+	void Grid::onDraw(const Matrix& parentMatrix) {
+
 		glBindVertexArray(vao);
 		glDrawArrays(GL_LINES, 0, (GLsizei)_verties.size());
 		glBindVertexArray(0);
+		//glUseProgram(0);
 	}
 }

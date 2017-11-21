@@ -2,10 +2,11 @@
 using namespace Ueuos;
 using namespace Math;
 
-UeuosObject::UeuosObject() :
+UeuosObject::UeuosObject():
 	transform(),
 	isModelDirty(true)
 {
+	transform.object = this;
 	updateModelMatrix();
 }
 
@@ -19,8 +20,20 @@ Matrix & Ueuos::UeuosObject::getModelMatrix()
 	return transform.modelMatrix;
 }
 
+void Ueuos::UeuosObject::addChild(Transform * child)
+{
+	transform.addChild(child);
+//	child->addTo(&transform);
+	//transform
+}
+
 void UeuosObject::updateModelMatrix() {
 	transform.updateModleMatrix();
+}
+
+void Ueuos::UeuosObject::draw(const Matrix & parentMatrix)
+{
+	onDraw(Matrix::indentity);
 }
 
 void UeuosObject::setPostion(const Vector3& newPostion) {
@@ -44,7 +57,7 @@ void UeuosObject::setScale(const Vector3& scale) {
 }
 
 void UeuosObject::draw() {
-	onDraw();
+	draw(Matrix::indentity);
 }
 
 Transform & Ueuos::UeuosObject::getTransform()
